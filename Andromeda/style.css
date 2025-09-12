@@ -1,0 +1,125 @@
+/* 🔹 Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 🔹 Menú de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #4b4646;
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
+}
+
+.navbar .logo img {
+    height: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.navbar .logo span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.cart {
+    position: relative;
+}
+
+.cart-icon {
+    height: 30px;
+    cursor: pointer;
+}
+
+#cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 3px 6px;
+}
+
+/* 🔹 Hero */
+.hero {
+    text-align: center;
+    padding: 40px;
+    background: #f3f3f3;
+}
+
+.hero img {
+    max-width: 500px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* 🔹 Productos */
+.productos {
+    padding: 40px;
+    text-align: center;
+}
+
+.product-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.product {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.product h3 {
+    margin: 10px 0;
+}
+
+.product button {
+    background: #2d572c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product button:hover {
+    background: #1e3e1d;
+}
+
+/* 🔹 Footer */
+footer {
+    background: #2d572c;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}

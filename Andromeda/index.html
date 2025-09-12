@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowShop - Inicio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 🔹 Menú de navegación -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="img/logo.png" alt="Logo GrowShop">
+                <span>GrowShop</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div class="cart">
+                <img src="img/cart.png" alt="Carrito" class="cart-icon">
+                <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 🔹 Sección principal -->
+    <section class="hero">
+        <h1>Bienvenido a GrowShop</h1>
+        <p>Tu tienda online de confianza para el cultivo y productos naturales.</p>
+        <img src="img/tienda.jpg" alt="Imagen de la tienda">
+    </section>
+
+    <!-- 🔹 Lista de productos destacados -->
+    <section class="productos">
+        <h2>Productos Destacados</h2>
+        <div class="product-list">
+            <div class="product">
+                <img src="img/producto1.jpg" alt="Producto 1">
+                <h3>Macetero</h3>
+                <p>$5.990</p>
+                <button onclick="addToCart()">Añadir al carrito</button>
+            </div>
+            <div class="product">
+                <img src="img/producto2.jpg" alt="Producto 2">
+                <h3>Fertilizante</h3>
+                <p>$12.990</p>
+                <button onclick="addToCart()">Añadir al carrito</button>
+            </div>
+            <div class="product">
+                <img src="img/producto3.jpg" alt="Producto 3">
+                <h3>Luz LED</h3>
+                <p>$29.990</p>
+                <button onclick="addToCart()">Añadir al carrito</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🔹 Footer -->
+    <footer>
+        <p>&copy; 2025 GrowShop | Todos los derechos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
