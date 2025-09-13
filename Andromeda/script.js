@@ -4,3 +4,4 @@ function addToCart() {
     cartCount++;
     document.getElementById("cart-count").innerText = cartCount;
 }
+

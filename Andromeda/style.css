@@ -1,8 +1,8 @@
 /* 🔹 Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    background-color: black;
+    line-height: 1.7;
 }
 
 /* 🔹 Menú de navegación */
@@ -10,14 +10,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #4b4646;
+    background: #090524f8;
     padding: 10px 20px;
     color: rgb(255, 255, 255);
 }
 
-.navbar .logo img {
-    height: 40px;
+.navbar .logo {
+    height: 100px;
     margin-right: 10px;
+    margin-bottom: -5%;
+    margin-top: -5%;
     vertical-align: middle;
 }
 
@@ -26,17 +28,6 @@ body {
     font-weight: bold;
 }
 
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-}
 
 .cart {
     position: relative;
@@ -65,10 +56,37 @@ body {
     background: #f3f3f3;
 }
 
+.hero {
+    background-image: url('images/fondo-andromeda-galaxy.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    color: white; 
+    text-align: center;
+    padding: 100px 20px; 
+    height: 800px; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Para mejorar la legibilidad */
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Para mejorar la legibilidad */
+}
+
 .hero img {
-    max-width: 500px;
-    margin-top: 20px;
-    border-radius: 10px;
+    /* Si quieres quitar la imagen de la tienda que tenías antes en el hero,
+       puedes eliminar esta regla o comentar la línea en el HTML */
+    display: none;
 }
 
 /* 🔹 Productos */
@@ -122,4 +140,90 @@ footer {
     text-align: center;
     padding: 15px;
     margin-top: 40px;
+    justify-items: baseline;
+}
+
+#titulo-pag {
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 40px;
+    vertical-align: middle;
+}
+
+aside {
+    position: fixed;
+    inset: 0 auto 0 0;
+    padding: 1rem;
+    width: 80px;
+    background-image: linear-gradient(rgba(1, 0, 22, 0.979),rgba(60, 4, 105, 0.667),rgba(0, 139, 93, 0.397));
+}
+
+aside nav ul {
+    display: flex;
+    flex-direction: column;      /* keep them vertical */
+    justify-content: flex-start; /* items start from top */
+    align-items: center;         /* horizontally center all icons */
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+nav a i {
+    margin: 0;                   /* let flex handle centering */
+    font-size: 1.8rem;           /* optional: scale the icon */
+}
+nav {
+    height: 100%;
+    border: 1px solid black;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  /* items at top */
+    align-items: center;          /* center horizontally in sidebar */
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+nav li:last-child{
+    margin-top: auto;
+}
+
+nav a {
+    display: flex;               /* flex container for icon + text */
+    justify-content: center;     /* center horizontally */
+    align-items: center;         /* center vertically */
+    width: 100%;                 /* full width of sidebar */
+    height: 50px;
+    text-decoration: none;
+    color: #ddd;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    padding: 0;                  /* remove extra padding */
+}
+
+nav a i {
+    margin: 0;                /* remove this to avoid conflicts */
+}
+nav a.active,
+nav a:hover,
+nav a:focus-visible {
+    outline: none;
+    color: #9900ff;
+    background-color: #f3f3f3;
+}
+
+nav a span {
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+}
+
+nav a:hover span {
+    opacity: 1;
+    visibility: visible;
+    margin-left: 10px; /* spacing from icon */
+    transition: 0.3s;
 }
