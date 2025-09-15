@@ -1,14 +1,127 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- SIMULACIÓN DE BASE DE DATOS ---
-    let productos = JSON.parse(localStorage.getItem('productos')) || [];
+    // --- DATOS INICIALES ---
+    let productos = JSON.parse(localStorage.getItem('productos')) || [
+        { 
+            id: 1, 
+            nombre: 'Bong de Vidrio Clásico', 
+            precio: 45000, 
+            img: 'images/bong1.png', 
+            categoria: 'Bongs', 
+            descripcion: 'Bong de vidrio resistente de 30cm, ideal para una experiencia suave y filtrada. Diseño clásico y fácil de limpiar.' 
+        },
+        { 
+            id: 2, 
+            nombre: 'Bong de Vidrio Percolador', 
+            precio: 65000, 
+            img: 'images/Bong_de_vidrio_2.png', 
+            categoria: 'Bongs', 
+            descripcion: 'Experimenta una filtración superior con este bong de percolador de nido de abeja. Suavidad garantizada en cada uso.' 
+        },
+        { 
+            id: 3, 
+            nombre: 'Cenicero de Cerámica', 
+            precio: 12000, 
+            img: 'images/Cenicero.png', 
+            categoria: 'Accesorios', 
+            descripcion: 'Cenicero de cerámica con diseño moderno y múltiples ranuras. Perfecto para compartir.' 
+        },
+        { 
+            id: 4, 
+            nombre: 'Cenicero de Viaje Portátil', 
+            precio: 8500, 
+            img: 'images/Cenicero_de_viaje.png', 
+            categoria: 'Accesorios', 
+            descripcion: 'Lleva tu cenicero a todas partes. Diseño compacto y a prueba de olores para máxima discreción.' 
+        },
+        { 
+            id: 5, 
+            nombre: 'Grinder Metálico 4 Piezas', 
+            precio: 18000, 
+            img: 'images/Grinder_metalico.png', 
+            categoria: 'Accesorios', 
+            descripcion: 'Grinder de metal duradero con 4 compartimentos, incluyendo un recogedor de polen. Molienda fina y uniforme.' 
+        },
+        { 
+            id: 6, 
+            nombre: 'Kit de Cultivo Indoor Completo', 
+            precio: 250000, 
+            img: 'images/Kit_de_cultivo_indoor.png', 
+            categoria: 'Cultivo', 
+            descripcion: 'Todo lo que necesitas para empezar tu cultivo en casa: carpa, luces, ventilación y más. ¡Resultados profesionales!' 
+        },
+        { 
+            id: 7, 
+            nombre: 'Set Limpia Pipas', 
+            precio: 5000, 
+            img: 'images/Limpia_pipas.png', 
+            categoria: 'Accesorios', 
+            descripcion: 'Mantén tus bongs y pipas como nuevos con este set de cepillos de limpieza de alta calidad.' 
+        },
+        { 
+            id: 8, 
+            nombre: 'Papelillos RAW Clásico', 
+            precio: 1500, 
+            img: 'images/Papelillos_raw.png', 
+            categoria: 'Papelillos', 
+            descripcion: 'Papel de liar RAW tamaño King Size, sin blanquear y 100% natural para una combustión lenta y pura.' 
+        },
+        { 
+            id: 9, 
+            nombre: 'Pipa de Cristal Soplado', 
+            precio: 15000, 
+            img: 'images/Pipa_de_cristal.png', 
+            categoria: 'Pipas', 
+            descripcion: 'Pipa de cristal de borosilicato, diseño ergonómico y portátil para un uso cómodo y discreto.' 
+        },
+        { 
+            id: 10, 
+            nombre: 'Pipa de Madera Noble', 
+            precio: 22000, 
+            img: 'images/Pipa_de_madera.png', 
+            categoria: 'Pipas', 
+            descripcion: 'Elegante pipa tallada en madera noble. Ofrece un sabor clásico y una experiencia de uso única.' 
+        },
+        { 
+            id: 11, 
+            nombre: 'Sustrato Light Mix 50L', 
+            precio: 20000, 
+            img: 'images/Sustrato_light_mix.png', 
+            categoria: 'Cultivo', 
+            descripcion: 'Sustrato de alta calidad, ligeramente fertilizado, ideal para un control total sobre la nutrición de tus plantas.' 
+        },
+        { 
+            id: 12, 
+            nombre: 'Tabaco American Spirit Orgánico', 
+            precio: 8000, 
+            img: 'images/Tabaco_American_Spirit.png', 
+            categoria: 'Tabacos', 
+            descripcion: 'Tabaco de liar 100% orgánico, sin aditivos. Sabor puro y natural.' 
+        },
+        { 
+            id: 13, 
+            nombre: 'Vaporizador G-Pen Pro', 
+            precio: 95000, 
+            img: 'images/Vaporizador_g-pen.png', 
+            categoria: 'Accesorios', 
+            descripcion: 'Vaporizador portátil para hierbas secas. Calentamiento rápido y cámara de cerámica para un sabor puro.' 
+        },
+        { 
+            id: 14, 
+            nombre: 'Bandeja para Liar RAW', 
+            precio: 16000, 
+            img: 'images/bandeja_raw.png', 
+            categoria: 'Accesorios', 
+            descripcion: 'Bandeja metálica RAW de tamaño mediano. La superficie perfecta para liar sin desorden.' 
+        }
+    ];
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
     let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
 
+    // --- FUNCIONES PARA GUARDAR DATOS ---
     const guardarProductos = () => localStorage.setItem('productos', JSON.stringify(productos));
     const guardarUsuarios = () => localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-    // LÓGICA PARA principal_admin.html
+    
+    // --- LÓGICA PARA principal_admin.html ---
     const statsContainer = document.getElementById('admin-stats');
     if (statsContainer) {
         statsContainer.innerHTML = `
@@ -18,9 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // LÓGICA PARA productos_admin.html  
+    // --- LÓGICA PARA productos_admin.html ---
     const productList = document.getElementById('product-list');
-    
     const productFormContainer = document.getElementById('product-form-container');
     const addProductBtn = document.getElementById('add-product-btn');
     const closeFormBtn = document.getElementById('close-form-btn');
@@ -46,17 +158,14 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (productList) {
-        // Abrir el contenedor del formulario y desplazarse a él
         addProductBtn.addEventListener('click', () => {
             document.getElementById('form-title').innerText = 'Agregar Producto';
             productForm.reset();
             document.getElementById('product-id').value = '';
             productFormContainer.style.display = 'block';
-            // Esta línea hace que la página se desplace suavemente hasta el formulario
             productFormContainer.scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Cerrar el contenedor del formulario
         closeFormBtn.addEventListener('click', () => {
             productFormContainer.style.display = 'none';
         });
@@ -79,13 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('product-img').value = producto.img;
                 document.getElementById('product-category').value = producto.categoria;
                 document.getElementById('product-description').value = producto.descripcion || '';
-                //  Mostrar y desplazarse al formulario para editar
                 productFormContainer.style.display = 'block';
                 productFormContainer.scrollIntoView({ behavior: 'smooth' });
             }
         });
 
-        //  Ocultar el formulario después de guardar
         productForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('product-id').value;
@@ -110,9 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             guardarProductos();
             renderizarProductosAdmin();
-            productFormContainer.style.display = 'none'; // Oculta el formulario
+            productFormContainer.style.display = 'none';
         });
     }
+
     // --- LLAMADAS INICIALES ---
     renderizarProductosAdmin();
     
