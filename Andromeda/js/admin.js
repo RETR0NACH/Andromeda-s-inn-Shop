@@ -52,9 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('product-id').value = '';
             productModal.style.display = 'block';
         });
-
         closeProductModalBtn.addEventListener('click', () => productModal.style.display = 'none');
-
         productList.addEventListener('click', (e) => {
             const id = e.target.dataset.id;
             if (e.target.classList.contains('delete-btn')) {
@@ -76,17 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 productModal.style.display = 'block';
             }
         });
-
         productForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('product-id').value;
-            // Se añade validación para la categoría 
             const categoria = document.getElementById('product-category').value;
             if (!categoria) {
                 alert('Por favor, elige una categoría para el producto.');
-                return; 
+                return;
             }
-
             const producto = {
                 nombre: document.getElementById('product-name').value,
                 precio: parseFloat(document.getElementById('product-price').value),
@@ -108,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-  
     // LÓGICA PARA usuarios_admin.html 
     const allUsersList = document.getElementById('all-users-list');
     const customersList = document.getElementById('customers-list');
@@ -117,18 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeUserModalBtn = document.getElementById('close-user-modal');
 
     const renderizarUsuariosAdmin = () => {
-        if (!allUsersList) return; // Si no estamos en la página de usuarios, no hacer nada.
-        
+        if (!allUsersList) return;
         allUsersList.innerHTML = '';
         customersList.innerHTML = '';
 
-        // Creamos una función reutilizable para generar la tarjeta de un usuario.
         const crearTarjetaUsuario = (usuario) => {
             const userOrders = pedidos.filter(p => p.usuarioId === usuario.id);
             const card = document.createElement('div');
             card.className = 'user-card';
             let purchasesHTML = '<p>Este usuario no ha realizado compras.</p>';
-
             if (userOrders.length > 0) {
                 const totalGastado = userOrders.reduce((acc, order) => acc + order.total, 0);
                 const productosComprados = userOrders.flatMap(o => o.productos.map(p => `<li>${p.nombre}</li>`)).join('');
@@ -140,47 +131,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 `;
             }
             
+            // clase específica al botón de eliminar usuario para evitar conflictos.
             card.innerHTML = `
                 <h3>${usuario.nombre} ${usuario.apellido || ''}</h3>
                 <p>${usuario.email}</p>
                 ${purchasesHTML}
                 <div class="card-actions">
                     <button class="edit-btn" data-id="${usuario.id}">Editar</button>
+                    <button class="delete-user-btn" data-id="${usuario.id}">Eliminar</button>
                 </div>
             `;
             return card;
         };
 
-        // Separamos la lógica para evitar duplicados.
         const idsDeClientes = new Set(pedidos.map(p => p.usuarioId));
-
         usuarios.forEach(usuario => {
             const tarjeta = crearTarjetaUsuario(usuario);
             if (idsDeClientes.has(usuario.id)) {
-                // Si el ID del usuario está en el set de clientes, lo añadimos a la lista de clientes.
                 customersList.appendChild(tarjeta);
             } else {
-                // Si no, lo añadimos a la lista de "otros usuarios".
                 allUsersList.appendChild(tarjeta);
             }
         });
 
-        // Actualizamos el título de la segunda sección para que sea más claro.
-        const allUsersHeader = allUsersList.previousElementSibling; // Busca el <h2> anterior
+        const allUsersHeader = allUsersList.previousElementSibling;
         if (allUsersHeader) {
             allUsersHeader.innerText = 'Usuarios sin Compras';
         }
     };
 
     if (allUsersList) {
+        // lógica de los botones (editar y eliminar).
         document.body.addEventListener('click', (e) => {
+            const id = e.target.dataset.id;
+
+            // Lógica para editar usuario
             if (e.target.classList.contains('edit-btn') && e.target.closest('.user-card')) {
-                const id = e.target.dataset.id;
                 const usuario = usuarios.find(u => u.id == id);
                 document.getElementById('user-id').value = usuario.id;
                 document.getElementById('user-name').value = usuario.nombre;
                 document.getElementById('user-email').value = usuario.email;
                 userModal.style.display = 'block';
+            }
+
+            // Lógica para eliminar usuario 
+            if (e.target.classList.contains('delete-user-btn')) {
+                if (confirm('¿Estás seguro de que quieres eliminar este usuario? Esta acción no se puede deshacer.')) {
+                    usuarios = usuarios.filter(u => u.id != id);
+                    guardarUsuarios();
+                    renderizarUsuariosAdmin();
+                }
             }
         });
         
@@ -205,10 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Cierre de modales
 window.onclick = function(event) {
-    if (event.target == document.getElementById('product-modal')) {
-        document.getElementById('product-modal').style.display = "none";
-    }
-    if (event.target == document.getElementById('user-modal')) {
-        document.getElementById('user-modal').style.display = "none";
+    if (event.target.id === 'product-modal' || event.target.id === 'user-modal') {
+        event.target.style.display = "none";
     }
 }
