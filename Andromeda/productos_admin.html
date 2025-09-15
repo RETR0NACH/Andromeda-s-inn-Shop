@@ -20,7 +20,7 @@
             <h1>Gestión de Productos</h1>
             <button id="add-product-btn" class="cta-button">Agregar Nuevo Producto</button>
             <div id="product-list" class="admin-card-container" style="margin-top: 2rem;">
-                </div>
+            </div>
         </main>
     </div>
 
@@ -44,16 +44,14 @@
                 </div>
                 <div class="form-group">
                     <label for="product-category">Categoría</label>
-                    <select>
-                    <!-- option tag starts -->
-                        <option>Choose an option</option>
+                    <select id="product-category" required>
+                        <option value="">Elige una opción</option>
                         <option value="Tabacos">Tabacos</option>
                         <option value="Pipas">Pipas</option>
                         <option value="Bongs">Bongs</option>
                         <option value="Papelillos">Papelillos</option>
                         <option value="Accesorios">Accesorios</option>
                         <option value="Cultivo">Cultivo</option>
-                    <!-- option tag ends -->
                     </select>
                 </div>
                 <div class="form-group">

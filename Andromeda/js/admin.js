@@ -1,19 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- SIMULACIÓN DE BASE DE DATOS ---
-    let productos = JSON.parse(localStorage.getItem('productos')) || [
-        { id: 1, nombre: 'Kit de Cultivo Indoor Básico', categoria: 'Cultivo', precio: 150000, img: 'https://via.placeholder.com/300', descripcion: 'Un kit ideal para empezar.' },
-        { id: 2, nombre: 'Fertilizante Orgánico', categoria: 'Cultivo', precio: 15000, img: 'https://via.placeholder.com/300', descripcion: 'Fertilizante 100% orgánico.' },
-    ];
-    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [
-        { id: 101, nombre: 'Ana Fuentes', email: 'ana@cliente.com', password: '123' },
-        { id: 102, nombre: 'Carlos Vera', email: 'carlos@cliente.com', password: '456' },
-        { id: 103, nombre: 'Usuario sin Compras', email: 'sincompras@cliente.com', password: '789' }
-    ];
-    let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [
-        { pedidoId: 1001, usuarioId: 101, productos: [{ productoId: 1, nombre: 'Kit de Cultivo Indoor Básico', precio: 150000 }], total: 150000 },
-        { pedidoId: 1002, usuarioId: 102, productos: [{ productoId: 2, nombre: 'Fertilizante Orgánico', precio: 15000 }], total: 15000 }
-    ];
+    let productos = JSON.parse(localStorage.getItem('productos')) || [];
+    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
 
     // --- FUNCIONES PARA GUARDAR DATOS ---
     const guardarProductos = () => localStorage.setItem('productos', JSON.stringify(productos));
@@ -90,11 +80,18 @@ document.addEventListener('DOMContentLoaded', () => {
         productForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('product-id').value;
+            // Se añade validación para la categoría 
+            const categoria = document.getElementById('product-category').value;
+            if (!categoria) {
+                alert('Por favor, elige una categoría para el producto.');
+                return; 
+            }
+
             const producto = {
                 nombre: document.getElementById('product-name').value,
                 precio: parseFloat(document.getElementById('product-price').value),
                 img: document.getElementById('product-img').value,
-                categoria: document.getElementById('product-category').value,
+                categoria: categoria,
                 descripcion: document.getElementById('product-description').value
             };
             if (id) {
@@ -125,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         allUsersList.innerHTML = '';
         customersList.innerHTML = '';
 
-        // **CAMBIO:** Creamos una función reutilizable para generar la tarjeta de un usuario.
+        // Creamos una función reutilizable para generar la tarjeta de un usuario.
         const crearTarjetaUsuario = (usuario) => {
             const userOrders = pedidos.filter(p => p.usuarioId === usuario.id);
             const card = document.createElement('div');
