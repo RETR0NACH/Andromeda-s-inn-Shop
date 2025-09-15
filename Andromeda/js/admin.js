@@ -111,9 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // ===============================================
-    // LÓGICA PARA usuarios_admin.html (CORREGIDA)
-    // ===============================================
+  
+    // LÓGICA PARA usuarios_admin.html 
     const allUsersList = document.getElementById('all-users-list');
     const customersList = document.getElementById('customers-list');
     const userModal = document.getElementById('user-modal');
@@ -155,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return card;
         };
 
-        // **CAMBIO:** Separamos la lógica para evitar duplicados.
+        // Separamos la lógica para evitar duplicados.
         const idsDeClientes = new Set(pedidos.map(p => p.usuarioId));
 
         usuarios.forEach(usuario => {
@@ -169,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // **CAMBIO:** Actualizamos el título de la segunda sección para que sea más claro.
+        // Actualizamos el título de la segunda sección para que sea más claro.
         const allUsersHeader = allUsersList.previousElementSibling; // Busca el <h2> anterior
         if (allUsersHeader) {
             allUsersHeader.innerText = 'Usuarios sin Compras';
