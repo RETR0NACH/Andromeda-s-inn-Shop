@@ -25,39 +25,61 @@
 
 <!--Menu Lateral-->
 <aside>
-  <div id="side-menu">
-    <ul>
-      <li><a href="principal.html">Main Page</a></li>
-      <li><a href="registro.html">Log In</a></li>
-      <li><a href="catalogo.html">Catálogo</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-      <li><a href="carrito.html">Shopping Cart</a></li>
-    </ul>
-  </div>
+    <div id="side-menu">
+        <ul>
+            <li><a href="principal.html">Main Page</a></li>
+            <li id="user-session-li">
+            </li>
+            <li>
+                <a href="catalogo.html">Catálogo</a>
+                <ul class="submenu">
+                    <li><a href="catalogo.html?categoria=Tabacos">Tabacos</a></li>
+                    <li><a href="catalogo.html?categoria=Pipas">Pipas</a></li>
+                    <li><a href="catalogo.html?categoria=Bongs">Bongs</a></li>
+                    <li><a href="catalogo.html?categoria=Papelillos">Papelillos</a></li>
+                    <li><a href="catalogo.html?categoria=Accesorios">Accesorios</a></li>
+                    <li><a href="catalogo.html?categoria=Cultivo">Cultivo</a></li>
+                </ul>
+            </li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="carrito.html">Shopping Cart</a></li>
+        </ul>
+    </div>
 </aside>
 
 <nav class="main-nav">
 </nav>
 
-<main class="container">
-  <div class="login-container">
-    <h2>Crear una Cuenta</h2>
-    <form id="register-form" novalidate>
-      <div class="form-group">
-        <label for="register-email">Correo Electrónico</label>
-        <input type="email" id="register-email" required>
-        <div class="error-message" id="register-email-error"></div>
-      </div>
-      <div class="form-group">
-        <label for="register-password">Contraseña</label>
-        <input type="password" id="register-password" required minlength="6">
-        <div class="error-message" id="register-password-error"></div>
-      </div>
-      <button type="submit" class="cta-button">Registrarse</button>
-    </form>
-    <p class="form-switch">¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a></p>
-  </div>
-</main>
+  <main class="container">
+        <div class="login-container">
+            <h2>Crear una Cuenta</h2>
+            <form id="register-form" novalidate>
+                <div class="form-group">
+                    <label for="register-nombre">Nombre</label>
+                    <input type="text" id="register-nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-apellido">Apellido</label>
+                    <input type="text" id="register-apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Correo Electrónico</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Contraseña</label>
+                    <input type="password" id="register-password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="register-password-confirm">Confirmar Contraseña</label>
+                    <input type="password" id="register-password-confirm" required>
+                </div>
+                <button type="submit" class="cta-button">Registrarse</button>
+            </form>
+            <p class="form-switch">¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a></p>
+        </div>
+    </main>
+
 
 <footer class="main-footer">
 </footer>

@@ -1,10 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- SIMULACIÓN DE BASE DE DATOS ---
-    // Añadimos 'nombre' a los usuarios y creamos un array para los pedidos.
     let productos = JSON.parse(localStorage.getItem('productos')) || [
-        { id: 1, nombre: 'Kit de Cultivo Indoor Básico', categoria: 'kits', precio: 150000, img: 'https://via.placeholder.com/300' },
-        { id: 2, nombre: 'Fertilizante Orgánico', categoria: 'fertilizantes', precio: 15000, img: 'https://via.placeholder.com/300' },
+        { id: 1, nombre: 'Kit de Cultivo Indoor Básico', categoria: 'Cultivo', precio: 150000, img: 'https://via.placeholder.com/300', descripcion: 'Un kit ideal para empezar.' },
+        { id: 2, nombre: 'Fertilizante Orgánico', categoria: 'Cultivo', precio: 15000, img: 'https://via.placeholder.com/300', descripcion: 'Fertilizante 100% orgánico.' },
     ];
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [
         { id: 101, nombre: 'Ana Fuentes', email: 'ana@cliente.com', password: '123' },
@@ -20,10 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const guardarProductos = () => localStorage.setItem('productos', JSON.stringify(productos));
     const guardarUsuarios = () => localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
-
-    // ===============================================
     // LÓGICA PARA principal_admin.html
-    // ===============================================
     const statsContainer = document.getElementById('admin-stats');
     if (statsContainer) {
         statsContainer.innerHTML = `
@@ -33,9 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // ===============================================
     // LÓGICA PARA productos_admin.html
-    // ===============================================
     const productList = document.getElementById('product-list');
     const productModal = document.getElementById('product-modal');
     const addProductBtn = document.getElementById('add-product-btn');
@@ -62,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (productList) {
-        // Abrir modal para agregar
         addProductBtn.addEventListener('click', () => {
             document.getElementById('modal-title').innerText = 'Agregar Producto';
             productForm.reset();
@@ -70,10 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
             productModal.style.display = 'block';
         });
 
-        // Cerrar modal
         closeProductModalBtn.addEventListener('click', () => productModal.style.display = 'none');
 
-        // Lógica de los botones de la tarjeta
         productList.addEventListener('click', (e) => {
             const id = e.target.dataset.id;
             if (e.target.classList.contains('delete-btn')) {
@@ -90,11 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('product-name').value = producto.nombre;
                 document.getElementById('product-price').value = producto.precio;
                 document.getElementById('product-img').value = producto.img;
+                document.getElementById('product-category').value = producto.categoria;
+                document.getElementById('product-description').value = producto.descripcion || '';
                 productModal.style.display = 'block';
             }
         });
 
-        // Guardar cambios del formulario (Crear/Editar)
         productForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('product-id').value;
@@ -102,12 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 nombre: document.getElementById('product-name').value,
                 precio: parseFloat(document.getElementById('product-price').value),
                 img: document.getElementById('product-img').value,
-                categoria: 'default' // Puedes añadir un campo para esto si quieres
+                categoria: document.getElementById('product-category').value,
+                descripcion: document.getElementById('product-description').value
             };
-            if (id) { // Editar
+            if (id) {
                 const index = productos.findIndex(p => p.id == id);
                 productos[index] = { ...productos[index], ...producto };
-            } else { // Crear
+            } else {
                 producto.id = Date.now();
                 productos.push(producto);
             }
@@ -119,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ===============================================
-    // LÓGICA PARA usuarios_admin.html
+    // LÓGICA PARA usuarios_admin.html (CORREGIDA)
     // ===============================================
     const allUsersList = document.getElementById('all-users-list');
     const customersList = document.getElementById('customers-list');
@@ -128,15 +121,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeUserModalBtn = document.getElementById('close-user-modal');
 
     const renderizarUsuariosAdmin = () => {
-        if (!allUsersList) return;
+        if (!allUsersList) return; // Si no estamos en la página de usuarios, no hacer nada.
+        
         allUsersList.innerHTML = '';
         customersList.innerHTML = '';
 
-        usuarios.forEach(usuario => {
+        // **CAMBIO:** Creamos una función reutilizable para generar la tarjeta de un usuario.
+        const crearTarjetaUsuario = (usuario) => {
             const userOrders = pedidos.filter(p => p.usuarioId === usuario.id);
             const card = document.createElement('div');
             card.className = 'user-card';
             let purchasesHTML = '<p>Este usuario no ha realizado compras.</p>';
+
             if (userOrders.length > 0) {
                 const totalGastado = userOrders.reduce((acc, order) => acc + order.total, 0);
                 const productosComprados = userOrders.flatMap(o => o.productos.map(p => `<li>${p.nombre}</li>`)).join('');
@@ -149,23 +145,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             card.innerHTML = `
-                <h3>${usuario.nombre}</h3>
+                <h3>${usuario.nombre} ${usuario.apellido || ''}</h3>
                 <p>${usuario.email}</p>
                 ${purchasesHTML}
                 <div class="card-actions">
                     <button class="edit-btn" data-id="${usuario.id}">Editar</button>
                 </div>
             `;
-            
-            if (userOrders.length > 0) {
-                customersList.appendChild(card.cloneNode(true));
+            return card;
+        };
+
+        // **CAMBIO:** Separamos la lógica para evitar duplicados.
+        const idsDeClientes = new Set(pedidos.map(p => p.usuarioId));
+
+        usuarios.forEach(usuario => {
+            const tarjeta = crearTarjetaUsuario(usuario);
+            if (idsDeClientes.has(usuario.id)) {
+                // Si el ID del usuario está en el set de clientes, lo añadimos a la lista de clientes.
+                customersList.appendChild(tarjeta);
+            } else {
+                // Si no, lo añadimos a la lista de "otros usuarios".
+                allUsersList.appendChild(tarjeta);
             }
-            allUsersList.appendChild(card);
         });
+
+        // **CAMBIO:** Actualizamos el título de la segunda sección para que sea más claro.
+        const allUsersHeader = allUsersList.previousElementSibling; // Busca el <h2> anterior
+        if (allUsersHeader) {
+            allUsersHeader.innerText = 'Usuarios sin Compras';
+        }
     };
 
     if (allUsersList) {
-        // Lógica para el botón de editar
         document.body.addEventListener('click', (e) => {
             if (e.target.classList.contains('edit-btn') && e.target.closest('.user-card')) {
                 const id = e.target.dataset.id;
@@ -177,10 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
-        // Cerrar modal
         closeUserModalBtn.addEventListener('click', () => userModal.style.display = 'none');
         
-        // Guardar cambios del usuario
         userForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('user-id').value;
@@ -198,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarUsuariosAdmin();
 });
 
-// Cierre de modales si se hace clic fuera de ellos
+// Cierre de modales
 window.onclick = function(event) {
     if (event.target == document.getElementById('product-modal')) {
         document.getElementById('product-modal').style.display = "none";
