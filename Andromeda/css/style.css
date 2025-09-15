@@ -37,9 +37,10 @@ mensaje-crear{
     top: -10px;
     left: 60px;
     /* Muestra el submenú a la derecha del elemento principal */
-    background-color: #333; /* Color de fondo del submenú */
+    background-color: #14031fe1; /* Color de fondo del submenú */
     min-width: 150px;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    border-radius: 2px;
+    box-shadow: 2px 2px 5px rgb(0, 0, 0);
     z-index: 10;
 }
 
@@ -51,4 +52,15 @@ mensaje-crear{
     padding: 10px;
     display: block;
     white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    color: white;
+    text-decoration: none;
+}
+
+#side-menu .submenu :hover a {
+    padding: 10px;
+    display: block;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    color: rgb(183, 0, 255);
+    text-decoration: none;
+    transition: 0.5s;
 }
