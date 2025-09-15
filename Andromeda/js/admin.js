@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
     let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
 
-    // --- FUNCIONES PARA GUARDAR DATOS ---
     const guardarProductos = () => localStorage.setItem('productos', JSON.stringify(productos));
     const guardarUsuarios = () => localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
@@ -19,11 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // LÓGICA PARA productos_admin.html
+    // LÓGICA PARA productos_admin.html  
     const productList = document.getElementById('product-list');
-    const productModal = document.getElementById('product-modal');
+    
+    const productFormContainer = document.getElementById('product-form-container');
     const addProductBtn = document.getElementById('add-product-btn');
-    const closeProductModalBtn = document.getElementById('close-product-modal');
+    const closeFormBtn = document.getElementById('close-form-btn');
     const productForm = document.getElementById('product-form');
 
     const renderizarProductosAdmin = () => {
@@ -46,13 +46,21 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (productList) {
+        // Abrir el contenedor del formulario y desplazarse a él
         addProductBtn.addEventListener('click', () => {
-            document.getElementById('modal-title').innerText = 'Agregar Producto';
+            document.getElementById('form-title').innerText = 'Agregar Producto';
             productForm.reset();
             document.getElementById('product-id').value = '';
-            productModal.style.display = 'block';
+            productFormContainer.style.display = 'block';
+            // Esta línea hace que la página se desplace suavemente hasta el formulario
+            productFormContainer.scrollIntoView({ behavior: 'smooth' });
         });
-        closeProductModalBtn.addEventListener('click', () => productModal.style.display = 'none');
+
+        // Cerrar el contenedor del formulario
+        closeFormBtn.addEventListener('click', () => {
+            productFormContainer.style.display = 'none';
+        });
+
         productList.addEventListener('click', (e) => {
             const id = e.target.dataset.id;
             if (e.target.classList.contains('delete-btn')) {
@@ -64,16 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (e.target.classList.contains('edit-btn')) {
                 const producto = productos.find(p => p.id == id);
-                document.getElementById('modal-title').innerText = 'Editar Producto';
+                document.getElementById('form-title').innerText = 'Editar Producto';
                 document.getElementById('product-id').value = producto.id;
                 document.getElementById('product-name').value = producto.nombre;
                 document.getElementById('product-price').value = producto.precio;
                 document.getElementById('product-img').value = producto.img;
                 document.getElementById('product-category').value = producto.categoria;
                 document.getElementById('product-description').value = producto.descripcion || '';
-                productModal.style.display = 'block';
+                //  Mostrar y desplazarse al formulario para editar
+                productFormContainer.style.display = 'block';
+                productFormContainer.scrollIntoView({ behavior: 'smooth' });
             }
         });
+
+        //  Ocultar el formulario después de guardar
         productForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('product-id').value;
@@ -98,114 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             guardarProductos();
             renderizarProductosAdmin();
-            productModal.style.display = 'none';
+            productFormContainer.style.display = 'none'; // Oculta el formulario
         });
     }
-
-
-    // LÓGICA PARA usuarios_admin.html 
-    const allUsersList = document.getElementById('all-users-list');
-    const customersList = document.getElementById('customers-list');
-    const userModal = document.getElementById('user-modal');
-    const userForm = document.getElementById('user-form');
-    const closeUserModalBtn = document.getElementById('close-user-modal');
-
-    const renderizarUsuariosAdmin = () => {
-        if (!allUsersList) return;
-        allUsersList.innerHTML = '';
-        customersList.innerHTML = '';
-
-        const crearTarjetaUsuario = (usuario) => {
-            const userOrders = pedidos.filter(p => p.usuarioId === usuario.id);
-            const card = document.createElement('div');
-            card.className = 'user-card';
-            let purchasesHTML = '<p>Este usuario no ha realizado compras.</p>';
-            if (userOrders.length > 0) {
-                const totalGastado = userOrders.reduce((acc, order) => acc + order.total, 0);
-                const productosComprados = userOrders.flatMap(o => o.productos.map(p => `<li>${p.nombre}</li>`)).join('');
-                purchasesHTML = `
-                    <div class="user-purchases">
-                        <strong>Total Gastado: $${totalGastado.toLocaleString('es-CL')}</strong>
-                        <ul>${productosComprados}</ul>
-                    </div>
-                `;
-            }
-            
-            // clase específica al botón de eliminar usuario para evitar conflictos.
-            card.innerHTML = `
-                <h3>${usuario.nombre} ${usuario.apellido || ''}</h3>
-                <p>${usuario.email}</p>
-                ${purchasesHTML}
-                <div class="card-actions">
-                    <button class="edit-btn" data-id="${usuario.id}">Editar</button>
-                    <button class="delete-user-btn" data-id="${usuario.id}">Eliminar</button>
-                </div>
-            `;
-            return card;
-        };
-
-        const idsDeClientes = new Set(pedidos.map(p => p.usuarioId));
-        usuarios.forEach(usuario => {
-            const tarjeta = crearTarjetaUsuario(usuario);
-            if (idsDeClientes.has(usuario.id)) {
-                customersList.appendChild(tarjeta);
-            } else {
-                allUsersList.appendChild(tarjeta);
-            }
-        });
-
-        const allUsersHeader = allUsersList.previousElementSibling;
-        if (allUsersHeader) {
-            allUsersHeader.innerText = 'Usuarios sin Compras';
-        }
-    };
-
-    if (allUsersList) {
-        // lógica de los botones (editar y eliminar).
-        document.body.addEventListener('click', (e) => {
-            const id = e.target.dataset.id;
-
-            // Lógica para editar usuario
-            if (e.target.classList.contains('edit-btn') && e.target.closest('.user-card')) {
-                const usuario = usuarios.find(u => u.id == id);
-                document.getElementById('user-id').value = usuario.id;
-                document.getElementById('user-name').value = usuario.nombre;
-                document.getElementById('user-email').value = usuario.email;
-                userModal.style.display = 'block';
-            }
-
-            // Lógica para eliminar usuario 
-            if (e.target.classList.contains('delete-user-btn')) {
-                if (confirm('¿Estás seguro de que quieres eliminar este usuario? Esta acción no se puede deshacer.')) {
-                    usuarios = usuarios.filter(u => u.id != id);
-                    guardarUsuarios();
-                    renderizarUsuariosAdmin();
-                }
-            }
-        });
-        
-        closeUserModalBtn.addEventListener('click', () => userModal.style.display = 'none');
-        
-        userForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const id = document.getElementById('user-id').value;
-            const index = usuarios.findIndex(u => u.id == id);
-            usuarios[index].nombre = document.getElementById('user-name').value;
-            usuarios[index].email = document.getElementById('user-email').value;
-            guardarUsuarios();
-            renderizarUsuariosAdmin();
-            userModal.style.display = 'none';
-        });
-    }
-
     // --- LLAMADAS INICIALES ---
     renderizarProductosAdmin();
-    renderizarUsuariosAdmin();
+    
 });
-
-// Cierre de modales
-window.onclick = function(event) {
-    if (event.target.id === 'product-modal' || event.target.id === 'user-modal') {
-        event.target.style.display = "none";
-    }
-}

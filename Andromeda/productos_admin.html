@@ -19,48 +19,46 @@
         <main class="admin-main-content">
             <h1>Gestión de Productos</h1>
             <button id="add-product-btn" class="cta-button">Agregar Nuevo Producto</button>
-            <div id="product-list" class="admin-card-container" style="margin-top: 2rem;">
-            </div>
-        </main>
-    </div>
 
-    <div id="product-modal" class="modal">
-        <div class="modal-content">
-            <span id="close-product-modal" class="close-btn">&times;</span>
-            <h2 id="modal-title">Agregar Producto</h2>
-            <form id="product-form">
-                <input type="hidden" id="product-id">
-                <div class="form-group">
-                    <label for="product-name">Nombre del Producto</label>
-                    <input type="text" id="product-name" required>
+            <div id="product-form-container" class="crud-form-container" style="display:none; margin-top: 2rem;">
+                <span id="close-form-btn" class="close-btn" style="cursor: pointer;">&times;</span>
+                <h2 id="form-title">Agregar Producto</h2>
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    <div class="form-group">
+                        <label for="product-name">Nombre del Producto</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Precio</label>
+                        <input type="number" id="product-price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-img">URL de la Imagen</label>
+                        <input type="text" id="product-img" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Categoría</label>
+                        <select id="product-category" required>
+                            <option value="">Elige una opción</option>
+                            <option value="Tabacos">Tabacos</option>
+                            <option value="Pipas">Pipas</option>
+                            <option value="Bongs">Bongs</option>
+                            <option value="Papelillos">Papelillos</option>
+                            <option value="Accesorios">Accesorios</option>
+                            <option value="Cultivo">Cultivo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description">Descripción</label>
+                        <textarea id="product-description" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button">Guardar Producto</button>
+                </form>
+            </div>
+            <div id="product-list" class="admin-card-container" style="margin-top: 2rem;">
                 </div>
-                <div class="form-group">
-                    <label for="product-price">Precio</label>
-                    <input type="number" id="product-price" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-img">URL de la Imagen</label>
-                    <input type="text" id="product-img" required>
-                </div>
-                <div class="form-group">
-                    <label for="product-category">Categoría</label>
-                    <select id="product-category" required>
-                        <option value="">Elige una opción</option>
-                        <option value="Tabacos">Tabacos</option>
-                        <option value="Pipas">Pipas</option>
-                        <option value="Bongs">Bongs</option>
-                        <option value="Papelillos">Papelillos</option>
-                        <option value="Accesorios">Accesorios</option>
-                        <option value="Cultivo">Cultivo</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="product-description">Descripción</label>
-                    <textarea id="product-description" required></textarea>
-                </div>
-                <button type="submit" class="cta-button">Guardar Producto</button>
-            </form>
-        </div>
+        </main>
     </div>
 
     <script src="js/admin.js"></script>
