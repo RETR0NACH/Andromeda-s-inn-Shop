@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrowShop - Crear Cuenta</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+<header>
+  <div id="top-bar">
+    <h1><a href="principal.html">Andromeda's Inn Shop</a></h1>
+    <div id="search-bar">
+      <form action="#" method="get">
+        <input type="text" name="search" placeholder="Search products...">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+    <div id="shopping-cart">
+      <a href="carrito.html">Shopping Cart</a>
+    </div>
+  </div>
+</header>
+
+<!--Menu Lateral-->
+<aside>
+  <div id="side-menu">
+    <ul>
+      <li><a href="principal.html">Main Page</a></li>
+      <li><a href="registro.html">Log In</a></li>
+      <li><a href="catalogo.html">Catálogo</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="carrito.html">Shopping Cart</a></li>
+    </ul>
+  </div>
+</aside>
+
+<nav class="main-nav">
+</nav>
+
+<main class="container">
+  <div class="login-container">
+    <h2>Crear una Cuenta</h2>
+    <form id="register-form" novalidate>
+      <div class="form-group">
+        <label for="register-email">Correo Electrónico</label>
+        <input type="email" id="register-email" required>
+        <div class="error-message" id="register-email-error"></div>
+      </div>
+      <div class="form-group">
+        <label for="register-password">Contraseña</label>
+        <input type="password" id="register-password" required minlength="6">
+        <div class="error-message" id="register-password-error"></div>
+      </div>
+      <button type="submit" class="cta-button">Registrarse</button>
+    </form>
+    <p class="form-switch">¿Ya tienes una cuenta? <a href="login.html">Inicia Sesión</a></p>
+  </div>
+</main>
+
+<footer class="main-footer">
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

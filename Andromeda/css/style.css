@@ -1,0 +1,54 @@
+/* Archivo: css/style.css (Añadir estas clases) */
+
+/* Estilo para el mensaje de error */
+.error-message {
+    color: #e74c3c; /* Rojo para errores */
+    font-size: 0.8rem;
+    height: 1rem; /* Reserva espacio para que el layout no salte */
+    margin-top: 4px;
+}
+
+/* Estilo para el campo de input cuando es inválido */
+.form-group input.invalid {
+    border-color: #e74c3c;
+    background-color: #fbeae5;
+}
+
+/*Diseño para registro */
+mensaje-crear{
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+#side-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#side-menu li {
+    position: relative; /* Esencial para el posicionamiento del submenu */
+}
+
+/* Oculta el submenú por defecto */
+#side-menu .submenu {
+    display: none;
+    position: absolute;
+    top: -10px;
+    left: 60px;
+    /* Muestra el submenú a la derecha del elemento principal */
+    background-color: #333; /* Color de fondo del submenú */
+    min-width: 150px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    z-index: 10;
+}
+
+/* Muestra el submenú al pasar el cursor sobre el elemento padre */
+#side-menu li:hover .submenu {
+    display: block;
+}
+#side-menu .submenu a {
+    padding: 10px;
+    display: block;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
