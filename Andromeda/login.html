@@ -12,6 +12,7 @@
 <header>
     <div id="top-bar">
         <h1><a href="principal.html">Andromeda's Inn Shop</a></h1>
+        <div id="welcome-message"></div>
         <div id="search-bar">
             <form action="#" method="get">
                 <input type="text" name="search" placeholder="Search products...">
@@ -19,7 +20,7 @@
             </form>
         </div>
         <div id="shopping-cart">
-            <a href="carrito.html">Shopping Cart</a>
+            <a href="carrito.html">Carrito de Compras</a>
         </div>
     </div>
 </header>
@@ -27,8 +28,9 @@
 <aside>
     <div id="side-menu">
         <ul>
-            <li><a href="principal.html">Main Page</a></li>
-            <li><a href="login.html">Iniciar Sesión</a></li>
+            <li><a href="principal.html">Página Principal</a></li>
+            <li id="user-session-li"></li>
+            <li id="admin-link-li"></li>            
             <li>
                 <a href="catalogo.html">Catálogo</a>
                 <ul class="submenu">
@@ -41,7 +43,7 @@
                 </ul>
             </li>
             <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="carrito.html">Shopping Cart</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
         </ul>
     </div>
 </aside>
@@ -71,7 +73,8 @@
     </div>
 </main>
 
-<footer class="main-footer">
+<footer>
+    <p>&copy; 2025 Andromeda's Inn Shop. All rights reserved.</p>
 </footer>
 
 <script src="js/main.js"></script>

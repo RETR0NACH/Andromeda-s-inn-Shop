@@ -8,25 +8,28 @@
 </head>
 <body>
 
-<div id="top-bar">
-    <h1><a href="principal.html">Andromeda's Inn Shop</a></h1>
-    <div id="search-bar">
-        <form action="#" method="get">
-            <input type="text" name="search" placeholder="Search products...">
-            <button type="submit">Search</button>
-        </form>
+<header>
+    <div id="top-bar">
+        <h1><a href="principal.html">Andromeda's Inn Shop</a></h1>
+        <div id="welcome-message"></div>
+        <div id="search-bar">
+            <form action="#" method="get">
+                <input type="text" name="search" placeholder="Search products...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div id="shopping-cart">
+            <a href="carrito.html">Carrito de Compras</a>
+        </div>
     </div>
-    <div id="shopping-cart">
-        <a href="carrito.html">Shopping Cart</a>
-    </div>
-</div>
+</header>
 
 <aside>
     <div id="side-menu">
         <ul>
-            <li><a href="principal.html">Main Page</a></li>
-            <li id="user-session-li">
-            </li>
+            <li><a href="principal.html">Página Principal</a></li>
+            <li id="user-session-li"></li>
+            <li id="admin-link-li"></li>            
             <li>
                 <a href="catalogo.html">Catálogo</a>
                 <ul class="submenu">
@@ -39,7 +42,7 @@
                 </ul>
             </li>
             <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="carrito.html">Shopping Cart</a></li>
+            <li><a href="carrito.html">Carrito de Compras</a></li>
         </ul>
     </div>
 </aside>
@@ -56,6 +59,10 @@
         <button id="pay-button" class="cta-button">Proceed to Payment</button>
     </div>
 </div>
+
+<footer>
+    <p>&copy; 2025 Andromeda's Inn Shop. All rights reserved.</p>
+</footer>
 
 <script src="js/main.js"></script>
 </body>
