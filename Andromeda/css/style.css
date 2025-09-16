@@ -1,5 +1,12 @@
 /* Archivo: css/style.css (Añadir estas clases) */
+body {
+    margin: 0;
+    padding: 0;
+}
 
+h1, h2, h3, h4, a, li, ul, p {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
 /* Estilo para el mensaje de error */
 .error-message {
     color: #e74c3c; /* Rojo para errores */
@@ -41,6 +48,14 @@ mensaje-crear{
     left: 0;
     overflow-y: auto; /* Permite desplazamiento si el contenido es muy largo */
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 30px;
+}
+
+#aside-logo{
+    width: 100%; 
+    height: 200px; 
+    margin-top: -60px;
+    margin-bottom: -40px;
 }
 
 /* Estilos para la lista de enlaces */
@@ -109,10 +124,16 @@ HEADER//HEADER//HEADER//HEADER//HEADER
 ====================================
 */
 
+.alumni-sans-pinstripe-regular {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .header {
     background-color: rgb(38, 5, 77); /* Usamos la variable para el color principal */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
+    padding: 0px 30px;
 }
 
 .header-inner {
@@ -126,8 +147,9 @@ HEADER//HEADER//HEADER//HEADER//HEADER
 
 /* Estilos para el logo */
 .logo a {
-    font-size: 24px;
-    color: var(--color-claro); /* Color blanco para que destaque */
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: 40px;
+    color: white; /* Color blanco para que destaque */
     font-weight: bold;
     text-decoration: none;
 }
@@ -173,4 +195,113 @@ HEADER//HEADER//HEADER//HEADER//HEADER
 
 .cart-container a:hover {
     color: var(--color-secundario);
+}
+
+
+/*
+====================================
+Efecto Parallax y Texto de Bienvenida
+====================================
+*/
+
+#main-content {
+    background-image: url('../images/fondo-andromeda-galaxy.png'); 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 13rem;
+    padding: 0;
+}
+
+#welcome-page {
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;    
+}
+
+#welcome-text-container {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    padding: 20px 40px;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+}
+
+/*
+/*
+====================================
+Sección de Productos Destacados
+====================================
+*/
+
+#product-section{
+    background-color: #0e0020c9; /* Fondo negro para lasección de productos */
+    color: white;
+    padding-bottom: 50px;
+}
+
+#product-section h3 {
+    text-align: center;
+    font-size: 2rem;
+    padding: 20px;
+}
+
+
+#product-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0px 20px;
+}
+
+
+
+
+
+.product-card {
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 250px; 
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px); 
+}
+
+.product-card img {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+    border-bottom: 1px solid #ddd;
+}
+
+.product-card .details {
+    padding: 15px;
+}
+
+.product-card h4 {
+    margin: 0 0 10px;
+}
+
+.product-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e6e6e6;
+}
+
+
+footer {
+    margin-left: 13rem;
+    background-color: #000000;
+    padding: 10px;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
 }

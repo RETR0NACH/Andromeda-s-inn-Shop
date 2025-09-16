@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Andromeda's Inn Shop</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Audiowide&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body>
 
+<body>
 <header class="header">
     <div class="header-inner">
         <h1 class="logo"><a href="principal.html">Andromeda's Inn Shop</a></h1>
@@ -27,6 +30,7 @@
 
 <aside  id="side-menu">
     <div>
+        <img id="aside-logo" src="images/Andromeda-Logo.png" alt="Logo Menu Desplegable">
         <ul>
             <li><a href="principal.html">Página Principal</a></li>
             <li id="user-session-li"></li>
@@ -50,14 +54,22 @@
     </div>
 </aside>
 
-<div id="main-content">
-    <h2>Andromeda's Inn Shop</h2>
-    <p>This is the main page content. Here you can display featured products, promotions, or a brief description of the shop.</p>
 
-    <div id="product-list">
-        <h3>Productos Destacados</h3>
+<main id="main-content">
+    <div id="welcome-page">
+        <div id="welcome-text-container">
+            <h2>Andromeda's Inn Shop</h2>
+            <p>Donde los cielos se encuentran con la tierra. Descubre productos de otro mundo y eleva tu cultivo a nuevas alturas.</p>
+        </div>
     </div>
-</div>
+    
+    <section id="product-section">
+        <h3>Productos Destacados</h3>    
+        <section id="product-list"></section>
+            <div class="product-grid"></div>
+        </section>
+    </section>
+</main>
 
 <footer>
     <p>&copy; 2025 Andromeda's Inn Shop. All rights reserved.</p>
