@@ -1,5 +1,12 @@
 /* Archivo: css/style.css (Añadir estas clases) */
+body {
+    margin: 0;
+    padding: 0;
+}
 
+h1, h2, h3, h4, a, li, ul, p {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+}
 /* Estilo para el mensaje de error */
 .error-message {
     color: #e74c3c; /* Rojo para errores */
@@ -30,7 +37,49 @@ mensaje-crear{
     position: relative; /* Esencial para el posicionamiento del submenu */
 }
 
+#side-menu {
+    width: 13rem;
+    background-color: #12031f; /* Un color oscuro para que el texto resalte */
+    color: white;
+    padding-top: 20px;
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana */
+    position: fixed; /* Mantiene la barra fija en la pantalla */
+    top: 0;
+    left: 0;
+    overflow-y: auto; /* Permite desplazamiento si el contenido es muy largo */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    font-size: 30px;
+}
+
+#aside-logo{
+    width: 100%; 
+    height: 200px; 
+    margin-top: -60px;
+    margin-bottom: -40px;
+}
+
+/* Estilos para la lista de enlaces */
+#side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#side-menu li a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#side-menu li a:hover {
+    background-color: #cc00ff2a; /* Un color un poco más claro al pasar el ratón */
+}
+
+
 /* Oculta el submenú por defecto */
+
 #side-menu .submenu {
     display: none;
     position: absolute;
@@ -63,4 +112,196 @@ mensaje-crear{
     color: rgb(183, 0, 255);
     text-decoration: none;
     transition: 0.5s;
+}
+
+.header, #main-content, .container {
+    margin-left: 13rem;
+}
+
+/*
+====================================
+HEADER//HEADER//HEADER//HEADER//HEADER
+====================================
+*/
+
+.alumni-sans-pinstripe-regular {
+  font-family: "Alumni Sans Pinstripe", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header {
+    background-color: rgb(38, 5, 77); /* Usamos la variable para el color principal */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 0px 30px;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between; /* Mueve los elementos a los extremos */
+    align-items: center; /* Centra los elementos verticalmente */
+    max-width: 90; /* Limita el ancho del contenido */
+    margin: 0 auto; /* Centra el header-inner en la página */
+    color: white;
+}
+
+/* Estilos para el logo */
+.logo a {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-size: 40px;
+    color: white; /* Color blanco para que destaque */
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Estilos para la barra de búsqueda */
+.search-bar {
+    flex-grow: 0.4; /* Permite que la barra de búsqueda ocupe el espacio disponible */
+    margin: 0 20px; /* Margen a la izquierda y derecha para separarla del logo y el carrito */
+}
+
+.search-bar form {
+    display: flex;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 8px 12px;
+    background-color: var(--color-secundario);
+    color: var(--color-claro);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #7d72c1;
+}
+
+/* Estilos para el carrito y su ícono */
+.cart-container a {
+    color: var(--color-claro);
+    text-decoration: none;
+    font-size: 1.5rem; /* Aumenta el tamaño del icono */
+    transition: color 0.3s ease;
+}
+
+.cart-container a:hover {
+    color: var(--color-secundario);
+}
+
+
+/*
+====================================
+Efecto Parallax y Texto de Bienvenida
+====================================
+*/
+
+#main-content {
+    background-image: url('../images/fondo-andromeda-galaxy.png'); 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 13rem;
+    padding: 0;
+}
+
+#welcome-page {
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;    
+}
+
+#welcome-text-container {
+    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    padding: 20px 40px;
+    color: rgb(255, 255, 255);
+    font-size: 50px;
+}
+
+/*
+/*
+====================================
+Sección de Productos Destacados
+====================================
+*/
+
+#product-section{
+    background-color: #0e0020c9; /* Fondo negro para lasección de productos */
+    color: white;
+    padding-bottom: 50px;
+}
+
+#product-section h3 {
+    text-align: center;
+    font-size: 2rem;
+    padding: 20px;
+}
+
+
+#product-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0px 20px;
+}
+
+
+
+
+
+.product-card {
+    background-color: #1a1a1a;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 250px; 
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px); 
+}
+
+.product-card img {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+    border-bottom: 1px solid #ddd;
+}
+
+.product-card .details {
+    padding: 15px;
+}
+
+.product-card h4 {
+    margin: 0 0 10px;
+}
+
+.product-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e6e6e6;
+}
+
+
+footer {
+    margin-left: 13rem;
+    background-color: #000000;
+    padding: 10px;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
 }
