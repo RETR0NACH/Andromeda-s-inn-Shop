@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // 1. CARGA DE DATOS Y VARIABLES GLOBALES
+    // 1. CARGA DE DATOS Y VARIABLES GLOBALES ...
     let productos = JSON.parse(localStorage.getItem('productos')) || [
         { id: 1, nombre: 'Bong de Vidrio Clásico', precio: 45000, img: 'images/bong1.png', categoria: 'Bongs', descripcion: 'Bong de vidrio resistente de 30cm, ideal para una experiencia suave y filtrada. Diseño clásico y fácil de limpiar.' },
         { id: 2, nombre: 'Bong de Vidrio Percolador', precio: 65000, img: 'images/bong2.png', categoria: 'Bongs', descripcion: 'Experimenta una filtración superior con este bong de percolador de nido de abeja. Suavidad garantizada en cada uso.' },
