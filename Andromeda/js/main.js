@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 9, nombre: 'Pipa de Cristal Soplado', precio: 15000, img: 'images/pipa_vidrio.png', categoria: 'Pipas', descripcion: 'Pipa de cristal de borosilicato, diseño ergonómico y portátil para un uso cómodo y discreto.' },
         { id: 10, nombre: 'Pipa de Madera Noble', precio: 22000, img: 'images/pipa_tabaco.png', categoria: 'Pipas', descripcion: 'Elegante pipa tallada en madera noble. Ofrece un sabor clásico y una experiencia de uso única.' },
         { id: 11, nombre: 'Sustrato Light Mix 50L', precio: 20000, img: 'images/sustrato.png', categoria: 'Cultivo', descripcion: 'Sustrato de alta calidad, ligeramente fertilizado, ideal para un control total sobre la nutrición de tus plantas.' },
-        { id: 12, nombre: 'Tabaco American Spirit Orgánico', precio: 8000, img: 'images/tabaco_naranja.png', categoria: 'Tabacos', descripcion: 'Tabaco de liar 100% orgánico, sin aditivos. Sabor puro y natural.' },
+        { id: 12, nombre: 'Tabaco American Spirit Orgánico', precio: 8000, img: 'images/tabaco_m.png', categoria: 'Tabacos', descripcion: 'Tabaco de liar 100% orgánico, sin aditivos. Sabor puro y natural.' },
         { id: 13, nombre: 'Vaporizador G-Pen Pro', precio: 95000, img: 'images/stundenglass.png', categoria: 'Accesorios', descripcion: 'Vaporizador portátil para hierbas secas. Calentamiento rápido y cámara de cerámica para un sabor puro.' },
         { id: 14, nombre: 'Bandeja para Liar RAW', precio: 16000, img: 'images/mono podrio.png', categoria: 'Accesorios', descripcion: 'Bandeja metálica RAW de tamaño mediano. La superficie perfecta para liar sin desorden.' }
     ];
