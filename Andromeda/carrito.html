@@ -1,68 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart - Andromeda's Inn Shop</title>
+    <title>Carrito de Compras - Andromeda's Inn Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Audiowide&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<!--Barra Superior .. -->
-<header>
-    <div id="top-bar">
-        <h1><a href="principal.html">Andromeda's Inn Shop</a></h1>
-        <div id="welcome-message"></div>
-        <div id="search-bar">
-            <form action="#" method="get">
-                <input type="text" name="search" placeholder="Search products...">
-                <button type="submit">Search</button>
-            </form>
-        </div>
-        <div id="shopping-cart">
-            <a href="carrito.html">Carrito de Compras</a>
-        </div>
-    </div>
-</header>
-<!--Menu Lateral ...-->
-<aside>
-    <div id="side-menu">
-        <ul>
-            <li><a href="principal.html">Página Principal</a></li>
-            <li id="user-session-li"></li>
-            <li id="admin-link-li"></li>            
-            <li>
-                <a href="catalogo.html">Catálogo</a>
-                <ul class="submenu">
-                    <li><a href="catalogo.html?categoria=Tabacos">Tabacos</a></li>
-                    <li><a href="catalogo.html?categoria=Pipas">Pipas</a></li>
-                    <li><a href="catalogo.html?categoria=Bongs">Bongs</a></li>
-                    <li><a href="catalogo.html?categoria=Papelillos">Papelillos</a></li>
-                    <li><a href="catalogo.html?categoria=Accesorios">Accesorios</a></li>
-                    <li><a href="catalogo.html?categoria=Cultivo">Cultivo</a></li>
+
+<aside id="side-menu">
+    <img id="aside-logo" src="images/Andromeda-Logo.png" alt="Logo Andromeda's Inn">
+    <ul>
+        <li><a href="principal.html"><i class="fa-solid fa-house"></i> Página Principal</a></li>
+        <li id="user-session-li"></li>
+        <li id="admin-link-li"></li>
+        <li>
+            <a href="catalogo.html"><i class="fa-solid fa-store"></i> Catálogo</a>
+            <ul class="submenu">
                 </ul>
-            </li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="carrito.html">Carrito de Compras</a></li>
-        </ul>
-    </div>
+        </li>
+        <li><a href="contacto.html"><i class="fa-solid fa-envelope"></i> Contacto</a></li>
+    </ul>
 </aside>
 
+<div class="page-content">
+    <header class="header">
+        <div class="header-inner">
+            <h1 class="logo"><a href="principal.html">Andromeda's Inn Shop</a></h1>
+            <div class="search-bar">
+                <form action="#" method="get">
+                    <input type="text" name="search" placeholder="Buscar productos...">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
+            </div>
+            <div class="cart-container">
+                <a href="carrito.html"><i class="fa-solid fa-cart-shopping"></i> Carrito</a>
+            </div>
+        </div>
+    </header>
 
-<div id="main-content">
-    <h2>Your Shopping Cart</h2>
-    <div id="cart-items">
-    </div>
+    <main id="main-content">
+        <div class="cart-page-container">
+            <h1>Tu Carrito de Compras</h1>
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th class="product-col">Producto</th>
+                        <th class="price-col">Precio</th>
+                        <th class="actions-col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items">
+                    </tbody>
+            </table>
 
-    <div id="cart-summary">
-        <h3>Total: $<span id="total-price">0.00</span></h3>
-        <button id="clear-cart-btn" class="cta-button">Clear Cart</button>
-        <button id="pay-button" class="cta-button">Proceed to Payment</button>
-    </div>
+            <div class="cart-summary">
+                <div class="total-price-container">
+                    <h3>Total: $<span id="total-price">0.00</span></h3>
+                </div>
+                <div class="cart-buttons-container">
+                    <button id="clear-cart-btn" class="secondary-button">Vaciar Carrito</button>
+                    <button id="pay-button" class="cta-button">Finalizar Compra</button>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
-
-<footer>
-    <p>&copy; 2025 Andromeda's Inn Shop. All rights reserved.</p>
-</footer>
 
 <script src="js/main.js"></script>
 </body>

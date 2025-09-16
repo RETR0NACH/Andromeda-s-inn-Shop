@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (adminLinkLi) adminLinkLi.innerHTML = `<a href="principal_admin.html" style="color: #3498db; font-weight: bold;">Panel de Admin</a>`;
     } else {
         // Lógica para usuario no logueado
-        if (userSessionLi) userSessionLi.innerHTML = `<a href="login.html">Iniciar Sesión</a>`;
+        if (userSessionLi) userSessionLi.innerHTML = `<a href="login.html"><i class="fa-solid fa-user"></i> Iniciar Sesión</a>`;
     }
 
     const logoutBtn = document.getElementById('logout-btn');
