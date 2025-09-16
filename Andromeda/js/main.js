@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sessionStorage.removeItem('usuarioActivo');
             sessionStorage.removeItem('isAdmin');
             mostrarNotificacion('Has cerrado sesión.', 'info');
-            setTimeout(() => { window.location.href = 'principal.html'; }, 1500);
+            setTimeout(() => { window.location.href = 'index.html'; }, 1500);
         });
     }
 
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (usuario && usuario.password === password) {
                 sessionStorage.setItem('usuarioActivo', JSON.stringify(usuario));
                 mostrarNotificacion(`¡Bienvenido de vuelta, ${usuario.nombre}!`, 'success');
-                setTimeout(() => { window.location.href = 'principal.html'; }, 1500);
+                setTimeout(() => { window.location.href = 'index.html'; }, 1500);
             } else {
                 mostrarNotificacion('Usuario o contraseña incorrectos.', 'error');
             }
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cart = [];
             saveCart();
             mostrarNotificacion('¡Gracias por tu compra!', 'success');
-            setTimeout(() => { window.location.href = 'principal.html'; }, 2000);
+            setTimeout(() => { window.location.href = 'index.html'; }, 2000);
         }
     });
 
