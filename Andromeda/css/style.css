@@ -276,7 +276,7 @@ Sección de Productos Destacados
     overflow: hidden;
     text-align: center;
     transition: transform 0.3s ease;
-    
+    text-decoration: none;
 }
 
 .product-card:hover {
@@ -355,18 +355,19 @@ footer {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
-    color: #555;
-    font-size: 1.2rem;
+    color: #000000;
+    font-size: 24px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
 }
 
 /* --- Estilos para los Inputs --- */
 .form-group input {
     width: 100%;
     padding: 12px 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 5px;
     font-size: 1.1rem;
-    font-family: 'Alumni Sans Pinstripe', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -399,7 +400,10 @@ footer {
 .form-switch {
     text-align: center;
     margin-top: 1.5rem;
-    font-size: 1.1rem;
+    font-size: 20px;
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-weight: bolder;
+    color: #585858;
 }
 
 /* --- Grilla de Productos --- */
@@ -727,3 +731,7 @@ footer {
     border-color: var(--color-acento);
     box-shadow: 0 0 8px rgba(155, 89, 182, 0.3);
 }}
+
+#email{
+    color: black;
+}
