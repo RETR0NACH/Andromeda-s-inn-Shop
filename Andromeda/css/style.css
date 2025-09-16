@@ -211,7 +211,9 @@ Efecto Parallax y Texto de Bienvenida
     background-repeat: no-repeat;
     background-size: cover;
     margin-left: 13rem;
-    padding: 0;
+    height: 100%;
+    padding-top: 5px;
+    padding-left: 2% ;
 }
 
 #welcome-page {
@@ -734,4 +736,11 @@ footer {
 
 #email{
     color: black;
+}
+
+#subtitles{
+    font-size: 40px;
+    color: white;
+    font-family: 'Audiowide', sans-serif;
+    padding: 15px 10px;
 }
