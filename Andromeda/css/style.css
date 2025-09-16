@@ -316,7 +316,7 @@ footer {
 
 
 
-/* 5. ESTILOS PARA FORMULARIOS (LOGIN Y REGISTRO)      */
+/* ESTILOS PARA FORMULARIOS (LOGIN Y REGISTRO)*/
 
 .centered-content { /* --- Clase para centrar contenido como el formulario --- */
     display: flex;
@@ -423,7 +423,7 @@ footer {
 }
 
 
-/* 6. PÁGINA DE DETALLES DEL PRODUCTO                  */
+/* PÁGINA DE DETALLES DEL PRODUCTO                  */
 /* --- Contenedor principal que alinea imagen y texto --- */
 .product-info-container {
     display: flex; 
@@ -524,9 +524,9 @@ footer {
 }
 
  
-/* =================================================== */
-/* 7. PÁGINA DEL CARRITO DE COMPRAS (CORREGIDO)        */
-/* =================================================== */
+
+/* PÁGINA DEL CARRITO DE COMPRAS 
+
 
 /* --- Contenedor de la página con fondo parallax --- */
 .parallax-background {
@@ -547,13 +547,13 @@ footer {
     width: 100%;
     max-width: 900px;
     padding: 2.5rem;
-    /* CAMBIO: Fondo semi-transparente y oscuro */
+    
     background-color: rgba(16, 3, 26, 0.9);
-    backdrop-filter: blur(10px); /* Efecto de desenfoque para un look "glassmorphism" */
+    backdrop-filter: blur(10px); 
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    /* CAMBIO: Color de texto claro por defecto */
+    
     color: var(--color-texto-claro);
 }
 
@@ -582,12 +582,12 @@ footer {
     text-align: left;
     font-family: var(--fuente-titulos);
     font-size: 1.2rem;
-    color: white; /* CAMBIO: Texto de cabecera blanco */
+    color: white; 
 }
 
 .cart-table td {
     padding: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* CAMBIO: Borde más sutil */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* 
     vertical-align: middle;
 }
 
@@ -656,7 +656,7 @@ footer {
     color: var(--color-fondo-sidebar);
 }
 
-/* 8. PÁGINA DE CONTACTO   */
+/*  PÁGINA DE CONTACTO   */
 
 
 .contact-page-container {
@@ -688,7 +688,7 @@ footer {
 
 /* --- Columna de Información (Izquierda) --- */
 .contact-info {
-    flex-basis: 40%; /* Ocupa el 40% del ancho */
+    flex-basis: 40%; 
 }
 .contact-info h3 {
     font-family: var(--fuente-titulos);
@@ -726,4 +726,4 @@ footer {
     outline: none;
     border-color: var(--color-acento);
     box-shadow: 0 0 8px rgba(155, 89, 182, 0.3);
-}
+}}
