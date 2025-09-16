@@ -266,6 +266,9 @@ Sección de Productos Destacados
     margin-top: 0.5rem;
     text-decoration: none;
 }
+.product-card a {
+    text-decoration: none;
+}
 
 .product-card {
     background-color: #2b2b2b;
