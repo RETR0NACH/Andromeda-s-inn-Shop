@@ -1,0 +1,10 @@
+export const initialProducts = [
+    { id: 1, nombre: 'Bong de Vidrio Clásico', precio: 45000, img: '/images/bong1.png', categoria: 'Bongs', descripcion: 'Bong de vidrio resistente de 30cm, ideal para una experiencia suave y filtrada. Diseño clásico y fácil de limpiar.' },
+    { id: 2, nombre: 'Bong de Vidrio Percolador', precio: 65000, img: '/images/bong2.png', categoria: 'Bongs', descripcion: 'Experimenta una filtración superior con este bong de percolador de nido de abeja. Suavidad garantizada en cada uso.' },
+    { id: 3, nombre: 'Blunt de Menta', precio: 1500, img: '/images/blunt_menta.png', categoria: 'Accesorios', descripcion: 'Blunt de menta con sabor fresco y suave. Ideal para disfrutar en cualquier momento.' },
+    { id: 4, nombre: 'Papelillos OCB Clásicos', precio: 1000, img: '/images/pap_ocb.png', categoria: 'Papelillos', descripcion: 'Papel de liar OCB clásico, ideal para una experiencia de fumar suave y controlada.' },
+    { id: 5, nombre: 'Grinder Metálico 4 Piezas', precio: 18000, img: '/images/moledor.png', categoria: 'Accesorios', descripcion: 'Grinder de metal duradero con 4 piezas y colector de polen. Muele tus hierbas a la perfección.' },
+    { id: 6, nombre: 'Pipa de Madera de Cerezo', precio: 25000, img: '/images/pipa_madera.png', categoria: 'Pipas', descripcion: 'Pipa de fumar clásica hecha de madera de cerezo. Diseño elegante y experiencia de fumar tradicional.' },
+    { id: 7, nombre: 'Tabaco de Vainilla', precio: 5000, img: '/images/tabaco_vainilla.png', categoria: 'Tabacos', descripcion: 'Tabaco aromático con un suave toque de vainilla. Perfecto para pipas o para liar.' },
+    { id: 8, nombre: 'Kit de Cultivo Indoor Básico', precio: 120000, img: '/images/kit_cultivo.png', categoria: 'Cultivo', descripcion: 'Todo lo que necesitas para empezar tu cultivo en interior: carpa, luz LED, ventilación y macetas.' }
+];

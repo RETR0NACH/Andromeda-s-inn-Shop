@@ -1,0 +1,229 @@
+/* 🔹 Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    line-height: 1.7;
+}
+
+/* 🔹 Menú de navegación */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #090524f8;
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
+}
+
+.navbar .logo {
+    height: 100px;
+    margin-right: 10px;
+    margin-bottom: -5%;
+    margin-top: -5%;
+    vertical-align: middle;
+}
+
+.navbar .logo span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.cart {
+    position: relative;
+}
+
+.cart-icon {
+    height: 30px;
+    cursor: pointer;
+}
+
+#cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    padding: 3px 6px;
+}
+
+/* 🔹 Hero */
+.hero {
+    text-align: center;
+    padding: 40px;
+    background: #f3f3f3;
+}
+
+.hero {
+    background-image: url('images/fondo-andromeda-galaxy.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    color: white; 
+    text-align: center;
+    padding: 100px 20px; 
+    height: 800px; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Para mejorar la legibilidad */
+}
+
+.hero p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Para mejorar la legibilidad */
+}
+
+.hero img {
+    /* Si quieres quitar la imagen de la tienda que tenías antes en el hero,
+       puedes eliminar esta regla o comentar la línea en el HTML */
+    display: none;
+}
+
+/* 🔹 Productos */
+.productos {
+    padding: 40px;
+    text-align: center;
+}
+
+.product-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.product {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.product h3 {
+    margin: 10px 0;
+}
+
+.product button {
+    background: #2d572c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.product button:hover {
+    background: #1e3e1d;
+}
+
+/* 🔹 Footer */
+footer {
+    background: #2d572c;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    justify-items: baseline;
+}
+
+#titulo-pag {
+    font-family: "Alumni Sans Pinstripe", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 40px;
+    vertical-align: middle;
+}
+
+aside {
+    position: fixed;
+    inset: 0 auto 0 0;
+    padding: 1rem;
+    width: 80px;
+    background-image: linear-gradient(rgba(1, 0, 22, 0.979),rgba(60, 4, 105, 0.667),rgba(0, 139, 93, 0.397));
+}
+
+aside nav ul {
+    display: flex;
+    flex-direction: column;      /* keep them vertical */
+    justify-content: flex-start; /* items start from top */
+    align-items: center;         /* horizontally center all icons */
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+nav a i {
+    margin: 0;                   /* let flex handle centering */
+    font-size: 1.8rem;           /* optional: scale the icon */
+}
+nav {
+    height: 100%;
+    border: 1px solid black;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;  /* items at top */
+    align-items: center;          /* center horizontally in sidebar */
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+nav li:last-child{
+    margin-top: auto;
+}
+
+nav a {
+    display: flex;               /* flex container for icon + text */
+    justify-content: center;     /* center horizontally */
+    align-items: center;         /* center vertically */
+    width: 100%;                 /* full width of sidebar */
+    height: 50px;
+    text-decoration: none;
+    color: #ddd;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    padding: 0;                  
+}
+
+nav a i {
+    margin: 0;               
+}
+nav a.active,
+nav a:hover,
+nav a:focus-visible {
+    outline: none;
+    color: #9900ff;
+    background-color: #f3f3f3;
+}
+
+nav a span {
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+}
+
+nav a:hover span {
+    opacity: 1;
+    visibility: visible;
+    margin-left: 10px; /* spacing from icon */
+    transition: 0.3s;
+}
