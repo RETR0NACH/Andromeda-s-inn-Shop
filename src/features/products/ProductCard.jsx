@@ -18,14 +18,24 @@ function ProductCard({ producto }) {
 
   return (
     <div className="product-card">
-      <Link to={`/producto/${producto.id}`}>
-        <img src={producto.img} alt={producto.nombre} className="product-image" />
-        <h3 className="product-name">{producto.nombre}</h3>
+      <Link to={`/producto/${producto.id}`} className="product-link">
+        <img 
+      src={producto.img} 
+      alt={producto.nombre} 
+      className="product-image" 
+      />
       </Link>
-      <p className="product-price">${producto.precio.toLocaleString('es-CL')}</p>
-      <button onClick={handleAddToCart} className="cta-button">
+      <div className="product-details">
+        <h3 className="product-name">{producto.nombre}</h3>
+        <p className="product-price">${producto.precio.toLocaleString('es-CL')}</p>
+      </div>
+
+
+      <div className="product-actions">
+        <button onClick={handleAddToCart} className="cta-button">
         Agregar al Carrito
       </button>
+      </div>
     </div>
   );
 }

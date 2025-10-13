@@ -9,7 +9,8 @@
     --color-acento: #000000;             
     --color-acento-hover: #34495e;       
     --color-texto-claro: #ecf0f1;        
-    --color-texto-oscuro: #2c3e50;       
+    --color-texto-oscuro: #2c3e50;
+    --color-fondo-card-details: #000000;       
     --fuente-titulos: 'Audiowide', sans-serif; 
     --fuente-cuerpo: 'Alumni Sans Pinstripe', sans-serif; 
     --sidebar-width: 200px;              
@@ -188,8 +189,8 @@ a {
     gap: 2rem;
 }
 .product-card {
-    background-color: #2b2b2b;
-    border-radius: 8px;
+    background-color: #ffffff;
+    border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -200,35 +201,45 @@ a {
     transform: translateY(-10px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
-.product-card a {
+.product-card .product-link {
     text-decoration: none;
     color: white;
-    display: flex;
-    flex-direction: column;
     flex-grow: 1;
 }
 .product-card img {
     width: 100%;
     height: 220px;
     object-fit: cover;
+    display: block; 
 }
-.product-card .details {
-    padding: 1rem 1.5rem;
+.product-details {
+    background-color: var(--color-fondo-card-details);
+    padding: 1rem;
     text-align: center;
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
-.product-card .details h4 {
+
+.product-name {
     font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+    color:var(--color-texto-claro);
+    margin-bottom: 0.75rem;
 }
-.product-card .details .price {
+
+.product-price{
     font-weight: bold;
     font-size: 1.5rem;
-    color: var(--color-texto-claro);
-    margin-top: auto; /* Empuja el precio hacia abajo */
-    padding-top: 0.5rem;
+    color: #ffffff;
+    font-family: var(--fuente-titulos);
+}
+.product-actions{
+    padding: 1rem;
+    background-color: #000000;
+}
+.product-actions .cta-button{
+    width: 100%;
 }
 
 /* =================================================== */
@@ -531,4 +542,103 @@ a {
 .add-to-cart-btn:hover {
     background-color: var(--color-acento-hover);
     transform: scale(1.02);
+}
+
+.catalog-page .catalog-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 2rem 0;
+    color: var(--color-texto-oscuro);
+}
+
+/* =================================================== */
+/* 10. ESTILOS DE LA PÁGINA DE CATÁLOGO                */
+/* =================================================== */
+
+.catalog-page {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.catalog-page h2.catalog-title {
+    text-align: center;
+    font-size: 2.9rem;
+    margin-bottom: 2rem;
+    color: var(--color-texto-oscuro);
+    
+}
+
+.catalog-page p.catalog-empty-message {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 3rem;
+    color: #666;
+    font-family: sans-serif; 
+}
+/* =================================================== */
+/* 11. FOOTER (PIE DE PÁGINA)                          */
+/* =================================================== */
+
+.site-footer {
+    background-color: var(--color-fondo-sidebar); 
+    color: var(--color-texto-claro);
+    padding: 2.5rem 2rem 1rem 2rem; 
+    margin-top: 2rem; 
+    border-top: 3px solid var(--color-acento-hover);
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    gap: 2rem; 
+    max-width: 1400px;
+    margin: 0 auto 2rem auto; 
+}
+
+.footer-section {
+    flex: 1; 
+    min-width: 250px; 
+}
+
+.footer-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+    border-bottom: 1px solid var(--color-acento-hover);
+    padding-bottom: 0.5rem;
+}
+
+.footer-section p,
+.footer-section li {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    color: #ccc; 
+}
+
+.footer-section.links ul {
+    list-style: none; 
+}
+
+.footer-section.links a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section.links a:hover {
+    color: #ffffff; 
+}
+
+.footer-section.contact i {
+    margin-right: 10px; 
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-acento-hover);
+    font-size: 1rem;
+    color: #aaa;
 }

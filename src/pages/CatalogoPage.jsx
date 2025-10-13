@@ -13,17 +13,18 @@ function CatalogoPage() {
     : productos;
 
   return (
-    <div>
-        <h2>{categoriaFiltro || 'Todo el Catálogo'}</h2>
-        <div className="product-grid">
-            {productosFiltrados.length > 0 ? (
-                productosFiltrados.map(producto => (
+    <div className="catalog-page">
+        <h2 className="catalog-title">{categoriaFiltro || 'Todo el Catálogo'}</h2>
+        
+        {productosFiltrados.length > 0 ? (
+            <div className="product-grid">
+                {productosFiltrados.map(producto => (
                     <ProductCard key={producto.id} producto={producto} />
-                ))
-            ) : (
-                <p>No hay productos en esta categoría.</p>
-            )}
-        </div>
+                ))}
+            </div>
+        ) : (
+            <p className="catalog-empty-message">No hay productos en esta categoría.</p>
+        )}
     </div>
   );
 }
