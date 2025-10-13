@@ -642,3 +642,178 @@ a {
     font-size: 1rem;
     color: #aaa;
 }
+/* =================================================== */
+/* 12. ESTILOS DEL CARRITO MEJORADO                    */
+/* =================================================== */
+
+/* Wrapper para centrar el contenedor del carrito */
+.cart-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea arriba por si el carrito es muy largo */
+    padding: 2rem;
+    min-height: 80vh;
+}
+
+.cart-page-container {
+    width: 100%;
+    max-width: 1000px; /* Aumentamos el ancho máximo */
+    /* El resto de los estilos de .cart-page-container que ya tenías están bien */
+}
+
+/* Nuevas columnas para la tabla */
+.cart-table .quantity-col { width: 20%; text-align: center; }
+.cart-table .subtotal-col { width: 20%; text-align: right; }
+.cart-table .price-col { text-align: right; }
+
+/* Controles de Cantidad (+/-) */
+.quantity-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.quantity-controls button {
+    background-color: var(--color-acento-hover);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.quantity-controls button:hover {
+    background-color: var(--color-fondo-sidebar);
+}
+.quantity-controls span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Mensaje de Carrito Vacío */
+.cart-empty {
+    text-align: center;
+    padding: 3rem;
+}
+.cart-empty p {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.cart-item-info {
+    display: flex;
+    align-items: center; 
+    gap: 15px;          
+}
+.cart-item-info span {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* =================================================== */
+/* 13. MODAL DE CONFIRMACIÓN                           */
+/* =================================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    color: var(--color-texto-oscuro); /* Aseguramos que el texto sea oscuro */
+}
+.modal-content h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+.modal-content p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+.modal-actions .secondary-button {
+    color: #ffffff; /* Texto oscuro */
+    border-color: #000000; /* Borde gris visible */
+    background-color: rgb(0, 0, 0); /* Fondo blanco explícito */
+}
+
+/* Hacemos que el hover se vea bien también */
+.modal-actions .secondary-button:hover {
+    background-color: #000000; /* Un gris muy claro al pasar el mouse */
+    color: var(--color-texto-oscuro);
+}
+
+/* =================================================== */
+/* 14. TOAST DE NOTIFICACIÓN                           */
+/* =================================================== */
+
+.toast-notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2ecc71; /* Color verde de éxito */
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 3000;
+    font-size: 1.2rem;
+    animation: fadeInOut 3s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; top: 0; }
+    20% { opacity: 1; top: 20px; }
+    80% { opacity: 1; top: 20px; }
+    100% { opacity: 0; top: 0; }
+}
+
+/* =================================================== */
+/* 15. PÁGINA DE PEDIDOS (ADMIN)                       */
+/* =================================================== */
+
+.orders-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+.order-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+.order-card h3 {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+.order-card p {
+    margin-bottom: 0.5rem;
+}
+.order-card ul {
+    list-style-position: inside;
+    margin-top: 0.5rem;
+}

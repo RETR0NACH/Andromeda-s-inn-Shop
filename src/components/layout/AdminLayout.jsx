@@ -1,5 +1,3 @@
-// RUTA: src/components/layout/AdminLayout.jsx
-
 import React from 'react';
 import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
@@ -21,10 +19,11 @@ function AdminLayout() {
         <div className="admin-wrapper">
             <aside className="admin-sidebar">
                 <h2>Andromeda's Inn</h2>
-                <ul>
+                 <ul>
                     <li><NavLink to="/admin" end>Principal</NavLink></li>
                     <li><NavLink to="/admin/productos">Productos</NavLink></li>
                     <li><NavLink to="/admin/usuarios">Usuarios</NavLink></li>
+                    <li><NavLink to="/admin/pedidos">Pedidos</NavLink></li> 
                     <li><NavLink to="/">Volver a la Tienda</NavLink></li>
                 </ul>
             </aside>
