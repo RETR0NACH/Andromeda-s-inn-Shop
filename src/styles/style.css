@@ -10,7 +10,7 @@
     --color-acento-hover: #34495e;       
     --color-texto-claro: #ecf0f1;        
     --color-texto-oscuro: #2c3e50;
-    --color-fondo-card-details: #000000;       
+    --color-fondo-card-details: #34495e;       
     --fuente-titulos: 'Audiowide', sans-serif; 
     --fuente-cuerpo: 'Alumni Sans Pinstripe', sans-serif; 
     --sidebar-width: 200px;              
@@ -189,7 +189,7 @@ a {
 .product-card {
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 15px #34495e;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
@@ -197,7 +197,7 @@ a {
 }
 .product-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    box-shadow: 0 8px 25px #ffffff;
 }
 .product-card .product-link {
     text-decoration: none;
@@ -234,10 +234,11 @@ a {
 }
 .product-actions{
     padding: 1rem;
-    background-color: #000000;
+    background-color: #34495e;
 }
 .product-actions .cta-button{
     width: 100%;
+    background-color: #34495e;
 }
 
 /* =================================================== */
