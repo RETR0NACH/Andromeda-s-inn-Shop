@@ -12,14 +12,22 @@ function LoginPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
-        if (!login(email, password)) {
-            setError('Correo o contraseña incorrectos.');
+    
+        const usuarioLogueado = login(email, password);
+
+        if (usuarioLogueado) {
+            // Si el login fue exitoso, comprobamos el rol del usuario
+            if (usuarioLogueado.rol === 'admin') {
+                navigate('/admin'); // Si es admin, va al panel de administración
+            } else {
+                navigate('/'); // Si es cliente, va a la página principal
+            }
         } else {
-            navigate('/'); // Redirige al home después del login exitoso
+            setError('Correo o contraseña incorrectos.');
         }
+       
     };
     
-    // Si ya está autenticado, no debería ver la página de login
     if (isAuthenticated) {
         return <Navigate to="/" />;
     }
@@ -32,23 +40,11 @@ function LoginPage() {
                     {error && <div className="error-message" style={{display: 'block', color: 'red'}}>{error}</div>}
                     <div className="form-group">
                         <label htmlFor="email">Correo Electrónico</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            required 
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+                        <input type="email" id="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Contraseña</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            required 
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
+                        <input type="password" id="password" required value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <button type="submit" className="cta-button">Ingresar</button>
                 </form>
