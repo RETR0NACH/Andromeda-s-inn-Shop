@@ -25,3 +25,30 @@
     list-style-position: inside;
     margin-top: 0.5rem;
 }
+
+/* =================================================== */
+/* 16. ESTILOS BOOTSTRTAP PAL ADMIN MENU LATERAL                 */
+/* =================================================== */
+
+.admin-sidebar .nav-pills .nav-link {
+    color: #f8f9fa; /* Texto claro */
+    margin-bottom: 0.5rem;
+}
+
+.admin-sidebar .nav-pills .nav-link:hover {
+    background-color: #572457; /* Un gris para el hover */
+}
+
+/* Este es el estilo importante para el enlace ACTIVO */
+.admin-sidebar .nav-pills .nav-link.active {
+    background-color: #fc02e7; /* Color azul primario de Bootstrap */
+    color: #fff;
+}
+
+.admin-sidebar hr {
+    color: #ffffff; /* Color del separador */
+    }
+
+.admin-sidebar{
+    background-color: #1e1030;
+}
