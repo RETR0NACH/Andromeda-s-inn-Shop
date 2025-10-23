@@ -67,7 +67,7 @@ a {
 #aside-logo {
     width: 80%;
     display: block;
-    margin: -7vh 2vh -1vh 2vh;
+    margin: -5vh 2vh 0vh 2vh;
 }
 #side-menu ul {
     list-style: none;
@@ -96,6 +96,11 @@ a {
 }
 #sidebar-list{
     padding: 0;
+}
+
+#sidebar-hola-user{
+    font-style: italic;
+    margin: 5vh 0vh 5vh 2vh;
 }
 
 /* =================================================== */
