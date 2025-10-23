@@ -9,7 +9,7 @@ function HomePage() {
 
   return (
     <>
-      <div id="welcome-page">
+      <div id="welcome-page" background>
         <div id="welcome-text-container">
           <h2>Andromeda's Inn Shop</h2>
           <p>Donde los cielos se encuentran con la tierra. Descubre productos de otro mundo y eleva tu cultivo a nuevas alturas.</p>

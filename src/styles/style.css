@@ -13,7 +13,7 @@
     --color-fondo-card-details: #293643;       
     --fuente-titulos: 'Audiowide', sans-serif; 
     --fuente-cuerpo: 'Alumni Sans Pinstripe', sans-serif; 
-    --sidebar-width: 200px;              
+    --sidebar-width: 25vh;              
 }
 
 /* --- Reseteo y Estilos Globales --- */
@@ -127,7 +127,7 @@ a {
 }
 #side-menu .submenu {
     display: none;
-    padding-left: 20px;
+    padding-left: 0px;
 }
 #side-menu li:hover > .submenu {
     display: block;
@@ -686,6 +686,127 @@ a {
 .catalog-page .product-grid {
     background-color: transparent; /* Asegura que el grid sea transparente */
 }
+
+/* src/styles/style.css */
+
+/* ... dentro de la sección 10 ... */
+
+/* Contenedor para título y búsqueda (para centrar y espaciar) */
+.catalog-header {
+    text-align: center; /* Centra el título y la barra */
+    margin-bottom: 2rem;
+}
+
+/* Estilos para la barra de búsqueda */
+.catalog-search-bar {
+    margin-top: 1rem; /* Espacio debajo del título */
+    display: inline-block; /* Para que el ancho se ajuste al input */
+    position: relative; /* Para posicionar íconos si los añades */
+    width: 100%; /* Ocupa todo el ancho en móvil */
+    max-width: 500px; /* Ancho máximo en pantallas grandes */
+}
+
+.catalog-search-bar input {
+    width: 100%;
+    padding: 10px 15px; /* Espaciado interno */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Bordes redondeados */
+    font-size: 1rem;
+    font-family: sans-serif; /* Fuente legible */
+}
+
+.catalog-search-bar input:focus {
+    outline: none;
+    border-color: var(--color-fondo-sidebar);
+    box-shadow: 0 0 8px rgba(16, 3, 26, 0.3);
+}
+
+/* src/styles/style.css */
+
+/* ... dentro de la sección 10 ... */
+
+/* Contenedor para título y controles */
+.catalog-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* --- Nuevo: Contenedor para búsqueda y filtro --- */
+.catalog-controls {
+    display: flex;
+    flex-wrap: wrap; /* Permite que el filtro baje en pantallas muy pequeñas */
+    justify-content: center; /* Centra los elementos */
+    align-items: center; /* Alinea verticalmente */
+    gap: 1rem; /* Espacio entre búsqueda y filtro */
+    margin-top: 1rem;
+}
+
+/* Ajustes a la barra de búsqueda existente */
+.catalog-search-bar {
+    flex-grow: 1; /* Permite que crezca */
+    max-width: 400px; /* Ancho máximo */
+    width: auto; /* Ancho automático en móvil */
+    margin-top: 0; /* Quita el margen superior anterior */
+    display: block; /* Asegura que funcione bien con flex */
+}
+/* Asegura que el input ocupe el espacio */
+.catalog-search-bar input {
+    width: 100%;
+}
+
+
+/* --- Nuevo: Estilos para el filtro de ordenamiento --- */
+.catalog-sort-filter select {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Mismo redondeo que la búsqueda */
+    font-size: 1rem;
+    font-family: sans-serif;
+    cursor: pointer;
+    background-color: white; /* Fondo blanco */
+    min-width: 180px; /* Ancho mínimo para que se lea bien */
+}
+
+.catalog-sort-filter select:focus {
+    outline: none;
+    border-color: var(--color-fondo-sidebar);
+    box-shadow: 0 0 8px rgba(16, 3, 26, 0.3);
+}
+
+/* ... resto de estilos de la sección 10 ... */
+
+/* --- Ajuste responsive (dentro de @media) --- */
+@media (min-width: 768px) { /* Un punto de quiebre intermedio podría ser útil */
+    .catalog-controls {
+        flex-wrap: nowrap; /* Evita que el filtro baje */
+    }
+    .catalog-search-bar {
+        width: auto; /* Ancho más ajustado en pantallas más grandes */
+    }
+}
+
+/* ... dentro de @media (min-width: 992px) ... */
+@media (min-width: 992px) {
+    /* Puedes refinar más los anchos si es necesario aquí */
+     /* ... */
+}
+
+/* ... resto de estilos ... */
+
+/* Opcional: Estilos si añades un icono dentro de la barra */
+/*
+.catalog-search-bar i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaa;
+}
+*/
+
+/* --- Ajuste responsive para la barra de búsqueda (dentro de @media) --- */
+
+/* ... resto de estilos ... */
 /* =================================================== */
 /* 11. FOOTER (PIE DE PÁGINA)                          */
 /* =================================================== */
