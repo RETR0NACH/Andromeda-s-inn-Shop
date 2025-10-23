@@ -162,7 +162,7 @@ a {
     display: block;
     background: none;
     border: none;
-    color: white;
+    color: white; /* Asegura el color blanco */
     font-size: 1.8rem;
     cursor: pointer;
     padding: 5px;
@@ -931,9 +931,7 @@ a {
     .sidebar-overlay {
         display: none !important;
     }
-    .hamburger-menu {
-        display: none;
-    }
+    
 
 
     /* --- HEADER --- */
@@ -1100,5 +1098,8 @@ a {
     }
     .modal-actions {
         flex-wrap: nowrap;
+    }
+    .hamburger-menu {
+        display: none; /* <-- Oculto en pantallas grandes */
     }
 }
