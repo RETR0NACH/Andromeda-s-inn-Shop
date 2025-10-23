@@ -643,9 +643,11 @@ a {
 /* =================================================== */
 
 .catalog-page {
+    background-image: url('public/images/fondo_estrellas.png');
     padding: 1rem; /* Menos padding */
     max-width: 1200px;
     margin: 0 auto;
+    
 }
 
 .catalog-page h2.catalog-title {
