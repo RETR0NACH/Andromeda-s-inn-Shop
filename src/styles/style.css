@@ -28,8 +28,7 @@ body {
     background-color: var(--color-fondo-main);
     color: var(--color-texto-oscuro);
     font-size: 20px;
-    /* Evita el scroll horizontal causado por la sidebar en móvil */
-    overflow-x: hidden;
+    /* ¡CORRECCIÓN! Se elimina 'overflow-x: hidden' de aquí */
 }
 
 h1, h2, h3, h4 {
@@ -45,10 +44,17 @@ a {
 /* 2. LAYOUT PRINCIPAL (MÓVIL PRIMERO)                 */
 /* =================================================== */
 
+/* ¡CORRECCIÓN! Nueva regla para el wrapper principal */
+.app-wrapper {
+    position: relative;
+    width: 100%;
+    overflow-x: hidden; /* El overflow se maneja aquí, no en el body */
+}
+
 .page-content {
     /* En móvil, el margen es 0 */
     margin-left: 0;
-    width: 100%;
+    /* ¡CORRECCIÓN! Se elimina 'width: 100%' */
     /* Añadimos transición para el movimiento */
     transition: margin-left 0.3s ease;
 }
@@ -817,7 +823,7 @@ a {
     width: 90%;
     max-width: 400px;
     text-align: center;
-    color: var(--color-texto-oscuro);
+    color: var(--color-texto-oscuro); /* Aseguramos que el texto sea oscuro */
 }
 .modal-content h4 {
     font-size: 1.5rem;
@@ -837,13 +843,14 @@ a {
 
 
 .modal-actions .secondary-button {
-    color: #ffffff; 
-    border-color: #000000; 
-    background-color: rgb(0, 0, 0); 
+    color: #ffffff; /* Texto oscuro */
+    border-color: #000000; /* Borde gris visible */
+    background-color: rgb(0, 0, 0); /* Fondo blanco explícito */
 }
 
+/* Hacemos que el hover se vea bien también */
 .modal-actions .secondary-button:hover {
-    background-color: #333; /* Oscuro al pasar el mouse */
+    background-color: #333; /* Un gris muy claro al pasar el mouse */
     color: white;
 }
 
@@ -856,7 +863,7 @@ a {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #2ecc71; 
+    background-color: #2ecc71; /* Color verde de éxito */
     color: white;
     padding: 1rem 1.5rem;
     border-radius: 8px;
