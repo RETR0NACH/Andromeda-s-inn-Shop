@@ -21,7 +21,7 @@ function Sidebar({ toggleSidebar }) {
             
             {/* Envolvemos la lista en un div para controlar el scroll independientemente del logo */}
             <div className="sidebar-links">
-                <ul>
+                <ul id="sidebar-list">
                     {/* Al hacer clic en un enlace, cerramos el menú */}
                     <li onClick={toggleSidebar}><NavLink to="/"><i className="fa-solid fa-house"></i> Página Principal</NavLink></li>
                     
