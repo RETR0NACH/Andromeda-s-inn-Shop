@@ -943,8 +943,9 @@ a {
     }
     .logo a {
         /* Devuelve el padding y tamaño original */
-        padding-left: 200px;
+        padding-left: 0px;
         font-size: 2rem;
+        font-style: italic;
     }
     .search-bar {
         /* Devuelve el orden y tamaño original */
