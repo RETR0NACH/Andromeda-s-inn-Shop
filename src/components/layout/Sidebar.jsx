@@ -12,10 +12,6 @@ function Sidebar({ toggleSidebar }) {
 
     return (
         <aside id="side-menu">
-            {/* Botón para cerrar el menú en móvil */}
-            <button className="close-sidebar-btn" onClick={toggleSidebar}>
-                <i className="fa-solid fa-times"></i>
-            </button>
 
             <img id="aside-logo" src="/images/Andromeda-Logo.png" alt="Logo Andromeda's Inn" />
             
