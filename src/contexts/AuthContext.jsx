@@ -53,7 +53,47 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setSesion(null);
   };
+
+const editarUsuario = (usuarioActualizado) => {
+
+    console.log('Contexto AuthContext: Se llamó a editarUsuario con:', usuarioActualizado);
+
+    if (usuarioActualizado.id === 0) {
+        console.warn("No se puede editar el usuario administrador.");
+        return;
+    }
+    setUsuarios(prevUsuarios => 
+      prevUsuarios.map(u => 
+        u.id === usuarioActualizado.id 
+        ? { ...u, // Mantenemos ID, password y rol originales
+            nombre: usuarioActualizado.nombre, 
+            apellido: usuarioActualizado.apellido, 
+            email: usuarioActualizado.email 
+          } 
+        : u
+      )
+    );
+    // Si el usuario editado es el que está en sesión, actualizamos la sesión también
+    if (sesion && sesion.id === usuarioActualizado.id) {
+        setSesion(prev => ({ ...prev, ...usuarioActualizado }));
+    }
+  };
   
+    const eliminarUsuario = (id) => {
+    // No permitir eliminar al admin (id 0)
+    if (id === 0) {
+        console.warn("No se puede eliminar el usuario administrador.");
+        return;
+    }
+    // No permitir eliminar al usuario actualmente en sesión
+    if (sesion && sesion.id === id) {
+        alert("No puedes eliminar tu propia cuenta mientras estás en sesión.");
+        return;
+    }
+    setUsuarios(prevUsuarios => prevUsuarios.filter(u => u.id !== id));
+  };
+
+
   const value = {
     usuarios,
     sesion,
@@ -62,7 +102,10 @@ export function AuthProvider({ children }) {
     login,
     register,
     logout,
+    editarUsuario, 
+    eliminarUsuario, 
   };
+
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
