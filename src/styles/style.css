@@ -631,39 +631,60 @@ a {
     transform: scale(1.02);
 }
 
-.catalog-page .catalog-title {
-    text-align: center;
-    font-size: 2.5rem;
-    margin: 2rem 0;
-    color: var(--color-texto-oscuro);
-}
 
+
+/* =================================================== */
+/* 10. ESTILOS DE LA PÁGINA DE CATÁLOGO                */
+/* =================================================== */
 /* =================================================== */
 /* 10. ESTILOS DE LA PÁGINA DE CATÁLOGO                */
 /* =================================================== */
 
 .catalog-page {
-    background-image: url('public/images/fondo_estrellas.png');
-    padding: 1rem; /* Menos padding */
-    max-width: 1200px;
+    /* --- INICIO DE LA MODIFICACIÓN --- */
+    background-image: url('/images/fondo_estrellas.png'); /* Ruta a tu imagen */
+    background-attachment: fixed;           /* Efecto Parallax */
+    background-position: center;            /* Centra la imagen */
+    background-repeat: no-repeat;           /* Evita que se repita */
+    background-size: cover;                 /* Cubre todo el espacio */
+    padding: 1rem;
+    max-width: 100%; /* Asegura que ocupe todo el ancho disponible */
     margin: 0 auto;
-    
+    min-height: 100vh; /* Asegura que cubra al menos toda la altura de la pantalla */
+    /* --- FIN DE LA MODIFICACIÓN --- */
 }
 
 .catalog-page h2.catalog-title {
     text-align: center;
     font-size: 2.2rem; /* Fuente más pequeña */
     margin-bottom: 2rem;
-    color: var(--color-texto-oscuro);
-    
+    color: var(--color-texto-claro); /* Cambiado a texto claro para contraste */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el título */
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    display: inline-block; /* Ajusta el fondo al tamaño del texto */
 }
+
+/* Centramos el título contenedor (opcional pero mejora la estética) */
+.catalog-page .catalog-title-container { /* Necesitarás añadir este div en CatalogoPage.jsx si no existe */
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
 
 .catalog-page p.catalog-empty-message {
     text-align: center;
     font-size: 1.3rem;
     padding: 3rem 1rem;
-    color: #666;
-    font-family: sans-serif; 
+    color: var(--color-texto-claro); /* Cambiado a texto claro */
+    font-family: sans-serif;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    border-radius: 8px;
+}
+
+/* Ajuste para que el grid no tenga fondo propio */
+.catalog-page .product-grid {
+    background-color: transparent; /* Asegura que el grid sea transparente */
 }
 /* =================================================== */
 /* 11. FOOTER (PIE DE PÁGINA)                          */
