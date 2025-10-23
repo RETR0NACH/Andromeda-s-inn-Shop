@@ -114,3 +114,101 @@
 .bg-warning-admin .card-footer {
     color: #333
 }
+
+/* RUTA: src/styles/admin.css (AÑADIR AL FINAL) */
+
+/* =================================================== */
+/* 18. ESTILOS DE ADMIN PRODUCTOS (NUEVO)            */
+/* =================================================== */
+
+/* * Estilo general para las tarjetas del panel de admin.
+ * Lo reutilizamos del dashboard para mantener consistencia.
+*/
+.admin-card {
+    border: none;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075);
+    border-radius: 0.5rem; /* Bordes redondeados */
+}
+
+.admin-card .card-header {
+    /* Aquí puedes cambiar el fondo del título */
+    background-color: #f8f9fa; 
+    border-bottom: 1px solid #dee2e6;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* * Cabecera de la tabla de productos.
+ * ¡Aquí puedes cambiar los colores! 
+*/
+.admin-table .admin-table-header {
+    /* Color de fondo de la cabecera de la tabla */
+    background-color: #fc02e7; /* Tu color principal del admin */
+    color: white;
+}
+
+.admin-table .admin-table-header th {
+    vertical-align: middle;
+}
+
+/* * Estilo para la imagen miniatura en la tabla.
+ * ¡Aquí puedes cambiar las dimensiones!
+*/
+.admin-product-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* * Ajuste para los botones de acciones en la tabla
+ * Evita que se separen en pantallas pequeñas
+*/
+.admin-table td:last-child {
+    white-space: nowrap; 
+}
+
+/* RUTA: src/styles/admin.css (AÑADIR AL FINAL) */
+
+/* =================================================== */
+/* 19. ESTILOS DE ADMIN USUARIOS Y PEDIDOS (NUEVO)   */
+/* =================================================== */
+
+/* --- Página de Usuarios --- */
+
+/* Estilo para el badge de rol (admin/cliente) */
+.admin-user-badge {
+    font-size: 0.8rem;
+    padding: 0.4em 0.7em;
+    min-width: 60px;
+    text-align: center;
+}
+
+/* --- Página de Pedidos (Acordeón) --- */
+.admin-order-accordion .accordion-item {
+    /* Color de fondo para cada item del acordeón */
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    margin-bottom: 0.5rem;
+    border-radius: 0.375rem; /* Bordes redondeados */
+}
+
+.admin-order-accordion .accordion-header-details {
+    /* Usamos flexbox para ordenar el resumen del pedido */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-right: 1rem; /* Espacio para que no se pegue al botón de flecha */
+}
+
+/* Color del cuerpo del acordeón (lista de productos) */
+.admin-order-accordion .accordion-body {
+    background-color: #fdfdfd;
+}
+
+.admin-order-accordion .list-group-item {
+    /* Color de fondo para cada producto en la lista */
+    background-color: transparent;
+}
