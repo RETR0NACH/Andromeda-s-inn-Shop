@@ -51,4 +51,66 @@
 
 .admin-sidebar{
     background-color: #1e1030;
+
+}
+
+/* RUTA: src/styles/admin.css (AÑADIR AL FINAL) */
+
+/* =================================================== */
+/* 17. ESTILOS DEL DASHBOARD (NUEVO)                 */
+/* =================================================== */
+
+/* --- Alerta de Bienvenida --- */
+/* Puedes cambiar este color de fondo */
+.admin-welcome-alert {
+    background-color: #e6f0ff;
+    border-color: #b3d1ff;
+    color: #004085;
+}
+.admin-welcome-alert .alert-heading {
+    color: inherit;
+}
+
+/* --- Tarjetas de Estadísticas --- */
+.admin-stat-card {
+    border: none;
+    transition: transform 0.2s ease;
+}
+
+/* Efecto hover */
+.admin-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+}
+
+.admin-stat-card .card-body {
+    padding: 1.5rem;
+}
+
+.admin-stat-card .card-footer {
+    background-color: rgba(0,0,0,0.1);
+    text-decoration: none;
+}
+.admin-stat-card .card-footer:hover {
+    background-color: rgba(0,0,0,0.2);
+}
+
+/* ¡AQUÍ PUEDES CAMBIAR LOS COLORES!
+  Estos colores sobreescriben los de Bootstrap.
+*/
+.bg-primary-admin {
+    /* Color principal (Productos) */
+    background-color: #0d6efd !important; 
+}
+.bg-success-admin {
+    /* Color de éxito (Usuarios) */
+    background-color: #198754 !important;
+}
+.bg-warning-admin {
+    /* Color de advertencia (Pedidos) */
+    background-color: #ffc107 !important;
+    color: #333 !important; /* Texto oscuro para fondo amarillo */
+}
+.bg-warning-admin .card-footer {
+    color: #333
 }
