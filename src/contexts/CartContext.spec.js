@@ -1,5 +1,3 @@
-// src/contexts/CartContext.spec.js
-
 // Mock muy simple para useAuth
 const mockUseAuth = (isLoggedIn = true, userId = 1) => ({
   sesion: isLoggedIn ? { id: userId, email: 'test@user.com' } : null
@@ -14,7 +12,7 @@ describe('CartContext Logic (Simplified Mock)', () => {
   const producto2 = { id: 102, nombre: 'Producto B', precio: 2500 };
 
   beforeEach(() => {
-    // ASEGURA QUE SE RESETEA EN CADA 'it'
+    
     simulatedCart = [];
     const { sesion } = mockUseAuth(true, mockSesionId);
 
@@ -32,13 +30,13 @@ describe('CartContext Logic (Simplified Mock)', () => {
         }
         updateCart(newCart);
     };
-    const decreaseQuantity = (productId) => { /* ... lógica que llama a updateCart ... */ 
+    const decreaseQuantity = (productId) => {  
         const newCart = simulatedCart.map(item =>
             item.id === productId ? { ...item, cantidad: item.cantidad - 1 } : item
         ).filter(item => item.cantidad > 0); 
         updateCart(newCart);
     };
-    const removeFromCart = (productId) => { /* ... lógica que llama a updateCart ... */ 
+    const removeFromCart = (productId) => {  
         const newCart = simulatedCart.filter(item => item.id !== productId);
         updateCart(newCart);
     };
@@ -57,8 +55,7 @@ describe('CartContext Logic (Simplified Mock)', () => {
     };
   });
 
-  // --- Tests (Estos deberían funcionar ahora) ---
-  // ... (Los 9 tests 'it' como estaban en la respuesta anterior) ...
+  // --- Tests ----
 
   it('1. Debería inicializar un carrito vacío', () => {
     expect(cartLogic.getCart()).toEqual([]);

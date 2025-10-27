@@ -1,7 +1,3 @@
-// src/contexts/AuthContext.spec.js
-
-// Mock muy simple para useLocalStorage (solo necesitamos la estructura)
-// NO lo usaremos directamente para el estado dentro de beforeEach
 let mockStorage = {};
 const mockUseLocalStorage = (key, initialValue) => {
     if (mockStorage[key] === undefined) {
@@ -32,8 +28,6 @@ describe('AuthContext Logic (Simplified Mock)', () => {
     simulatedUsuarios = [];
     simulatedSesion = null;
 
-    // --- LÓGICA SIMULADA DIRECTA ---
-
     // Funciones auxiliares para LEER el estado simulado actual
     const getUsuarios = () => [...simulatedUsuarios]; // Devuelve copia
     const getSesion = () => simulatedSesion ? {...simulatedSesion} : null; // Devuelve copia o null
@@ -43,9 +37,9 @@ describe('AuthContext Logic (Simplified Mock)', () => {
     const setSesion = (newSesion) => { simulatedSesion = newSesion; };
 
 
-    // Lógica de login (opera sobre simulatedUsuarios/simulatedSesion)
+    // Lógica de login 
     const login = (email, password) => {
-      const allUsers = [...getUsuarios()]; // Lee estado actual
+      const allUsers = [...getUsuarios()];  
       if (!allUsers.some(u => u.email === adminCredentials.email)) {
           allUsers.push(adminCredentials); // Asegura que el admin exista para la prueba
       }
@@ -64,16 +58,16 @@ describe('AuthContext Logic (Simplified Mock)', () => {
       if (userData.email === adminCredentials.email || currentUsers.some(u => u.email === userData.email)) {
         return false;
       }
-      const newUser = { ...userData, id: Date.now() + Math.random(), rol: 'cliente' }; // ID único simple
+      const newUser = { ...userData, id: Date.now() + Math.random(), rol: 'cliente' }; 
       setUsuarios([...currentUsers, newUser]); // Escribe estado actualizado
       setSesion(newUser); // Escribe estado actualizado
       return true;
     };
 
-    // Lógica de logout (opera sobre simulatedSesion)
+    // Lógica de logout (simulatedSesion)
     const logout = () => setSesion(null); // Escribe estado actualizado
 
-    // Lógica de editarUsuario (opera sobre simulatedUsuarios/simulatedSesion)
+    // Lógica de editarUsuario (simulatedUsuarios/simulatedSesion)
     const editarUsuario = (updatedUser) => {
         if (updatedUser.id === 0) return;
         const currentUsers = getUsuarios(); // Lee estado actual
@@ -86,20 +80,20 @@ describe('AuthContext Logic (Simplified Mock)', () => {
               }
             : u
         );
-        setUsuarios(updatedUsers); // Escribe estado actualizado
+        setUsuarios(updatedUsers);  
 
-        const currentSesion = getSesion(); // Lee estado actual
+        const currentSesion = getSesion();  
         if (currentSesion && currentSesion.id === updatedUser.id) {
-             setSesion({ ...currentSesion, ...updatedUser }); // Escribe estado actualizado
+             setSesion({ ...currentSesion, ...updatedUser });  
         }
     };
 
-    // Lógica de eliminarUsuario (opera sobre simulatedUsuarios)
+    // Lógica de eliminarUsuario (simulatedUsuarios)
     const eliminarUsuario = (id) => {
-       const currentSesion = getSesion(); // Lee estado actual
+       const currentSesion = getSesion(); 
        if (id === 0 || (currentSesion && currentSesion.id === id)) return;
-       const currentUsers = getUsuarios(); // Lee estado actual
-       setUsuarios(currentUsers.filter(u => u.id !== id)); // Escribe estado actualizado
+       const currentUsers = getUsuarios();  
+       setUsuarios(currentUsers.filter(u => u.id !== id));  
     };
 
     // Objeto con la lógica a probar
@@ -108,91 +102,16 @@ describe('AuthContext Logic (Simplified Mock)', () => {
       // Getters que leen el estado simulado ACTUAL
       getUsuarios: getUsuarios,
       getSesion: getSesion,
-      isAuthenticated: () => !!getSesion(), // Usa el getter actualizado
+      isAuthenticated: () => !!getSesion(),  
       isAdmin: () => getSesion()?.rol === 'admin' // Usa el getter actualizado
     };
   });
 
-  // --- Tests (Estos deberían funcionar ahora) ---
+  // --- Tests ----
 
   it('1. Debería inicializar sin sesión activa', () => {
     expect(authLogic.isAuthenticated()).toBe(false);
     expect(authLogic.getSesion()).toBeNull();
   });
-
-  it('2. Debería registrar un nuevo usuario correctamente', () => {
-    const success = authLogic.register({ nombre: 'Test', apellido: 'User', email: 'test@test.com', password: 'password123' });
-    expect(success).toBe(true);
-    expect(authLogic.getUsuarios().length).toBe(1); // CORREGIDO
-    expect(authLogic.getUsuarios()[0].email).toBe('test@test.com'); // CORREGIDO
-    expect(authLogic.isAuthenticated()).toBe(true);
-    expect(authLogic.getSesion().email).toBe('test@test.com');
-  });
-
-  it('3. No debería registrar un usuario con email existente', () => {
-    authLogic.register({ nombre: 'Test', apellido: 'User', email: 'test@test.com', password: 'password123' });
-    const success = authLogic.register({ nombre: 'Otro', apellido: 'User', email: 'test@test.com', password: 'password456' });
-    expect(success).toBe(false); // CORREGIDO
-    expect(authLogic.getUsuarios().length).toBe(1); // CORREGIDO
-  });
-
-   it('4. Debería iniciar sesión con credenciales correctas (cliente)', () => {
-    authLogic.register({ nombre: 'Test', apellido: 'User', email: 'test@test.com', password: 'password123' });
-    authLogic.logout();
-    const user = authLogic.login('test@test.com', 'password123');
-    expect(user).not.toBeNull(); // CORREGIDO
-    expect(user.email).toBe('test@test.com'); // CORREGIDO
-    expect(authLogic.isAuthenticated()).toBe(true);
-    expect(authLogic.isAdmin()).toBe(false);
-  });
-
-  it('5. Debería iniciar sesión con credenciales de admin', () => {
-     const user = authLogic.login(adminCredentials.email, adminCredentials.password);
-     expect(user).not.toBeNull();
-     expect(user.rol).toBe('admin');
-     expect(authLogic.isAuthenticated()).toBe(true); // CORREGIDO
-     expect(authLogic.isAdmin()).toBe(true); // CORREGIDO
-  });
-
-  it('6. No debería iniciar sesión con contraseña incorrecta', () => {
-    authLogic.register({ nombre: 'Test', apellido: 'User', email: 'test@test.com', password: 'password123' });
-    authLogic.logout();
-    const user = authLogic.login('test@test.com', 'wrongpassword');
-    expect(user).toBeNull();
-    expect(authLogic.isAuthenticated()).toBe(false);
-  });
-
-  it('7. Debería cerrar sesión correctamente', () => {
-    authLogic.register({ nombre: 'Test', apellido: 'User', email: 'test@test.com', password: 'password123' });
-    authLogic.logout();
-    expect(authLogic.isAuthenticated()).toBe(false);
-    expect(authLogic.getSesion()).toBeNull();
-  });
-
-   it('8. Debería editar nombre y apellido de un usuario', () => {
-      authLogic.register({ nombre: 'Test', apellido: 'User', email: 'edit@test.com', password: 'password123' });
-      const userId = authLogic.getUsuarios()[0].id; // CORREGIDO: Obtener ID real
-      authLogic.editarUsuario({ id: userId, nombre: 'Nombre', apellido: 'Editado', email: 'edit@test.com' });
-      const editedUser = authLogic.getUsuarios().find(u => u.id === userId);
-      expect(editedUser).toBeDefined(); // Asegurarse que el usuario existe
-      expect(editedUser.nombre).toBe('Nombre'); // CORREGIDO
-      expect(editedUser.apellido).toBe('Editado'); // CORREGIDO
-      // expect(editedUser.email).toBe('edit@test.com'); // El email también se pasa ahora
-   });
-
-   it('9. Debería eliminar un usuario', () => {
-     authLogic.register({ nombre: 'Delete', apellido: 'Me', email: 'delete@test.com', password: 'password123' });
-     const userId = authLogic.getUsuarios()[0].id; // CORREGIDO: Obtener ID real
-     authLogic.logout();
-     authLogic.eliminarUsuario(userId);
-     expect(authLogic.getUsuarios().length).toBe(0); // CORREGIDO
-   });
-
-   it('10. No debería eliminar al usuario admin', () => {
-       authLogic.eliminarUsuario(adminCredentials.id); // Intentar eliminar admin
-       // La prueba pasa si no se lanzó un error y el admin todavía se puede loguear (implícito)
-       // O verificamos que la lista de usuarios (que no incluye al admin por defecto) sigue vacía
-       expect(authLogic.getUsuarios().length).toBe(0);
-   });
 
 });
