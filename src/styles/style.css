@@ -220,7 +220,7 @@ a {
 }
 #welcome-page {
     height: 70vh; /* Altura menor en móvil */
-    background-image: url('images/fondos/fondo-andromeda-galaxy.png'); 
+    background-image: url('/images/fondos/fondo-andromeda-galaxy.png'); 
     /* Parallax puede ser costoso en móviles, usamos 'scroll' */
     background-attachment: scroll;
     background-position: center;
