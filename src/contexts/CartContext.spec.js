@@ -18,7 +18,7 @@ describe('CartContext Logic (Simplified Mock)', () => {
 
     // Funciones que modifican 'simulatedCart'
     const updateCart = (newCart) => { if(sesion) simulatedCart = newCart; };
-    const addToCart = (producto) => { /* ... lógica que llama a updateCart ... */ 
+    const addToCart = (producto) => {  
         const existingProductIndex = simulatedCart.findIndex(item => item.id === producto.id);
         let newCart = [];
         if (existingProductIndex !== -1) {
@@ -90,7 +90,7 @@ describe('CartContext Logic (Simplified Mock)', () => {
      const cart = cartLogic.getCart();
      expect(cart.length).toBe(2);
      expect(cartLogic.getItemCount()).toBe(3);
-     expect(cartLogic.getTotal()).toBe(4500); // (1000*2 + 2500*1)
+     expect(cartLogic.getTotal()).toBe(4500);  
   });
 
    it('5. Debería disminuir la cantidad de un producto', () => {
