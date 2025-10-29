@@ -1,7 +1,5 @@
 # Andromeda's Inn Shop - Frontend React
 
-![Andromeda Logo](public/images/Andromeda-Logo.png)
-
 ## Introducción
 
 **Andromeda's Inn Shop** es la interfaz de usuario (frontend) para una tienda en línea especializada en productos de growshop. Este proyecto fue desarrollado como parte de la asignatura Desarrollo FullStack II, utilizando **React** y **Vite** para crear una Single Page Application (SPA) moderna y dinámica.
