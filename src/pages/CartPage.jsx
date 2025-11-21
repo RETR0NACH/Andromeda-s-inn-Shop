@@ -1,5 +1,3 @@
-// RUTA: src/pages/CartPage.jsx (VERSIÓN FINAL, BASADA EN LA PRUEBA EXITOSA)
-
 import React, { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
 import { useOrders } from '../contexts/OrderContext';
