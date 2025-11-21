@@ -3,7 +3,7 @@ const mockUseAuth = (isLoggedIn = true, userId = 1) => ({
   sesion: isLoggedIn ? { id: userId, email: 'test@user.com' } : null
 });
 
-describe('CartContext Logic (Simplified Mock)', () => {
+describe('CartContext Logic', () => {
   let cartLogic;
   let simulatedCart; // Variable local para el carrito de CADA prueba
   const mockSesionId = 1;
