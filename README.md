@@ -1,7 +1,5 @@
 # Andromeda's Inn Shop - Frontend React
 
-![Andromeda Logo](public/images/Andromeda-Logo.png)
-
 ## Introducción
 
 **Andromeda's Inn Shop** es la interfaz de usuario (frontend) para una tienda en línea especializada en productos de growshop. Este proyecto fue desarrollado como parte de la asignatura Desarrollo FullStack II, utilizando **React** y **Vite** para crear una Single Page Application (SPA) moderna y dinámica.
@@ -83,8 +81,6 @@ La aplicación simula un entorno de e-commerce completo, incluyendo catálogo de
     ```
     Karma iniciará, abrirá un navegador (Chrome o Brave, según `karma.conf.js`) y mostrará los resultados en la terminal.
 
-## 📁 Estructura del Proyecto (Simplificada)
-/public # Archivos estáticos (imágenes, index.html principal) /src ├── /components # Componentes reutilizables (layout, common) │ ├── /common │ └── /layout # (Header, Footer, Sidebar, MainLayout, AdminLayout) ├── /contexts # Manejo de estado global (Auth, Cart, Product, Order) ├── /data # Datos iniciales (ej: initialProducts) ├── /features # Componentes específicos de una funcionalidad (ej: ProductCard) ├── /hooks # Hooks personalizados (ej: useLocalStorage) ├── /pages # Componentes de página completa (HomePage, LoginPage, Admin...) │ └── /admin # Páginas específicas del panel de administración ├── /styles # Archivos CSS (style.css, admin.css) ├── main.jsx # Punto de entrada principal de React y configuración de rutas └── (otros archivos de configuración como babel.config.js) karma.conf.js # Configuración de Karma babel.config.js # Configuración de Babel vite.config.js # Configuración de Vite package.json # Dependencias y scripts del proyecto README.md # Este archivo
 ## 🔮 Posibles Mejoras Futuras
 
 * Conectar el frontend a un backend real (Node.js, Express, etc.) con una base de datos (MongoDB, PostgreSQL) para persistencia real.
