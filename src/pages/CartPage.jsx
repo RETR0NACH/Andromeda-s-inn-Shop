@@ -24,14 +24,17 @@ function CartPage() {
     
     const cancelRemove = () => { setItemToRemove(null); };
 
-    const handleCheckout = () => {
+    const handleCheckout = async() => {
         if (cart.length === 0) {
             alert("Tu carrito está vacío.");
             return;
         }
-        addOrder(cart, total); 
-        clearCart(); 
-        setShowToast(true);
+
+        const exito = await addOrder(cart, total);
+        if (exito) {
+            clearCart(); 
+            setShowToast(true);
+        }
     };
 
     return (
