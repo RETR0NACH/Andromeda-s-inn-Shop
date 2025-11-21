@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import api from '../config/api';
+import api from '../config/api'; // Importamos la conexión al Backend
 import { useAuth } from './AuthContext';
 
 const OrderContext = createContext();
@@ -10,9 +10,9 @@ export function useOrders() {
 
 export function OrderProvider({ children }) {
   const [orders, setOrders] = useState([]);
-  const { isAdmin } = useAuth(); // Para saber si cargar todos los pedidos
+  const { isAdmin } = useAuth(); 
 
-  // Cargar pedidos (solo si es Admin)
+  // 1. Cargar pedidos del Backend (Solo si es Admin)
   useEffect(() => {
     if (isAdmin) {
       const fetchOrders = async () => {
@@ -27,18 +27,21 @@ export function OrderProvider({ children }) {
     }
   }, [isAdmin]);
 
-  // Crear Pedido
+  // 2. Crear Pedido (Enviar al Backend)
   const addOrder = async (cart, total) => {
     try {
-      // Preparamos el objeto tal cual lo espera el Backend (Modelo Order.java)
       const orderData = {
         total: total,
+        // Nota: Si tu backend espera detalles de productos, agrégalos aquí.
+        // Por ahora enviamos lo básico para que guarde el registro.
       };
 
+      // POST a la base de datos real
       const response = await api.post('/orders', orderData);
       
       if (response.status === 200) {
-        // Si es admin, actualizamos la lista local
+        alert("¡Compra realizada con éxito! (Guardada en BD)");
+        // Si es admin y está viendo la lista, la actualizamos
         if (isAdmin) setOrders(prev => [...prev, response.data]);
         return true;
       }
