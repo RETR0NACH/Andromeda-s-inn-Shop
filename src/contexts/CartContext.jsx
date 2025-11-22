@@ -1,5 +1,3 @@
-// RUTA: src/contexts/CartContext.jsx
-
 import React, { createContext, useContext } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useAuth } from './AuthContext';
