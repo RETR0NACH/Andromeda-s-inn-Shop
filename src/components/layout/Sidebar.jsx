@@ -25,14 +25,6 @@ function Sidebar({ toggleSidebar }) {
                     {/* --- INICIO: Íconos cambiados a Bootstrap Icons --- */}
                     <li onClick={toggleSidebar}><NavLink to="/"><i className="bi bi-house-door-fill me-2"></i> Página Principal</NavLink></li>
 
-                    {isAuthenticated ? (
-                        <>
-                            <li onClick={() => { logout(); toggleSidebar(); }}><a href="#"><i className="bi bi-box-arrow-right me-2"></i> Cerrar Sesión</a></li>
-                        </>
-                    ) : (
-                        <li onClick={toggleSidebar}><NavLink to="/login"><i className="bi bi-box-arrow-in-right me-2"></i> Iniciar Sesión</NavLink></li>
-                    )}
-
                     {isAdmin && (
                         <li onClick={toggleSidebar}><NavLink to="/admin"><i className="bi bi-shield-lock-fill me-2"></i> Panel Admin</NavLink></li>
                     )}
@@ -48,6 +40,33 @@ function Sidebar({ toggleSidebar }) {
                     <li onClick={toggleSidebar}><NavLink to="/contacto"><i className="bi bi-envelope-fill me-2"></i> Contacto</NavLink></li>
                     {/* --- FIN: Íconos cambiados a Bootstrap Icons --- */}
                 </ul>
+            </div>
+
+            {/* --- BLOQUE DE ACCIONES INFERIORES (LOGIN/LOGOUT) --- */}
+            <div className="sidebar-bottom-actions">
+                {isAuthenticated ? (
+                    <>
+                        <hr className="sidebar-divider" />
+                        <div className="logout-link-wrapper">
+                            <a 
+                                href="#" 
+                                onClick={() => { logout(); toggleSidebar(); }}
+                                className="logout-button"
+                            >
+                                <i className="bi bi-box-arrow-right me-2"></i> Cerrar Sesión
+                            </a>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <hr className="sidebar-divider" />
+                        <div className="login-link-wrapper">
+                            <NavLink to="/login" className="login-button">
+                                <i className="bi bi-box-arrow-in-right me-2"></i> Iniciar Sesión
+                            </NavLink>
+                        </div>
+                    </>
+                )}
             </div>
         </aside>
     );

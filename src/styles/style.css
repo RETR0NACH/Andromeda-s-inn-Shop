@@ -49,6 +49,54 @@ a {
     overflow-x: hidden; /* El overflow se maneja aquí, no en el body */
 }
 
+/* --- NUEVOS ESTILOS PARA LA PARTE INFERIOR DEL SIDEBAR (Botón Logout) --- */
+.sidebar-bottom-actions {
+    /* Por defecto, en móvil, está al final del flujo y tiene padding */
+    padding: 15px;
+    width: 100%;
+}
+
+.sidebar-divider {
+    color: var(--color-acento-hover); /* Usa el color de acento para la línea */
+    margin: 15px 0;
+}
+
+.logout-button {
+    /* Estilos del botón de Cerrar Sesión (rojo y redondeado) */
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #581919; /* Rojo de error/peligro (Vibrant Red) */
+    color: var(--color-texto-claro) ; /* Texto claro */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+    font-family: var(--fuente-titulos);
+}
+
+.logout-button:hover {
+    background-color: #c0392b; /* Rojo más oscuro al hacer hover */
+}
+
+/* Aseguramos que el botón de inicio de sesión también se vea como botón */
+.login-button {
+    display: block;
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #3d1446; 
+    color: var(--color-texto-claro);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+    font-family: var(--fuente-titulos);
+}
+
+.login-button:hover {
+    background-color: var(--color-acento-hover);
+}
+
+
+
 .page-content {
     /* En móvil, el margen es 0 */
     margin-left: 0;
@@ -121,7 +169,7 @@ a {
     font-size: 1.3rem;
 }
 #side-menu li a:hover {
-    background-color: var(--color-acento-hover);
+    background-color: #4f1b5c;
 }
 #side-menu .submenu {
     display: none;
@@ -516,14 +564,22 @@ a {
 /* 8. PÁGINA DE CONTACTO                               */
 /* =================================================== */
 
+.contact-page-wrapper {
+    /* Ajustamos el min-height para que cubra toda el área visible */
+    min-height: 100vh; 
+    background-color: #686767; /* Fondo gris claro para el área exterior */
+    padding: 2rem 1rem; /* Añadimos padding para que el contenedor no se pegue a los bordes */
+}
+
 .contact-page-container {
     max-width: 1000px;
-    margin: 1rem auto; /* Menos margen */
-    padding: 1.5rem; /* Menos padding */
-    background-color: #ffffff;
+    margin: 0 auto; /* Centrado dentro del wrapper y sin margen vertical */
+    padding: 1.5rem;
+    background-color: #ffffff; /* Revertimos el interior a blanco para contraste */
     border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
+
 .contact-page-container h2 { /* Asumiendo que es h2, no h1 */
     text-align: center;
     font-size: 2rem; /* Fuente más pequeña */
@@ -1081,10 +1137,15 @@ a {
 
 
     /* --- PÁGINA PRINCIPAL --- */
+    /* --- ENCONTRAR Y REEMPLAZAR EN EL BLOQUE @media (min-width: 992px) --- */
     #welcome-page {
         height: 95vh;
         background-attachment: fixed; /* Reactiva el parallax */
+        /* CORRECCIÓN: Desplaza el centro de la imagen hacia la derecha 
+           la mitad del ancho del sidebar para centrarla en el contenido. */
+        background-position: calc(50% + (var(--sidebar-width) / 2)) center; 
     }
+
     #welcome-text-container {
         padding: 2rem 3rem;
         width: auto;

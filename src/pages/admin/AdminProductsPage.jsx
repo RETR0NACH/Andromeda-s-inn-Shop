@@ -22,6 +22,7 @@ function AdminProductsPage() {
   const [showForm, setShowForm] = useState(false); // ¿Mostrar el formulario?
   const [isEditing, setIsEditing] = useState(false); // ¿Estamos editando (true) o añadiendo (false)?
   const [formData, setFormData] = useState(initialFormState); // Datos del formulario
+  const [newCategoryName, setNewCategoryName] = useState(''); // <--- AÑADE ESTA LÍNEA
   const [imagePreview, setImagePreview] = useState(''); // Para la vista previa de la imagen
 
   // Efecto para actualizar la vista previa cuando cambia formData.img
@@ -50,6 +51,7 @@ function AdminProductsPage() {
   const handleCloseForm = () => {
     setShowForm(false); 
     setFormData(initialFormState); 
+    setNewCategoryName(''); // <--- LIMPIA ESTE ESTADO
   };
 
   // Maneja cambios en los inputs del formulario
@@ -61,8 +63,19 @@ function AdminProductsPage() {
   // Maneja el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Convertir precio a número antes de guardar
-    const productData = { ...formData, precio: parseInt(formData.precio, 10) || 0 };
+
+    // 1. Determinar la categoría final
+    // Si la opción seleccionada es 'Nueva Categoria' Y el campo no está vacío, usamos el nombre nuevo.
+    const finalCategory = formData.categoria === 'Nueva Categoria' && newCategoryName
+        ? newCategoryName.trim()
+        : formData.categoria;
+
+    // 2. Crear los datos del producto con la categoría final
+    const productData = { 
+        ...formData, 
+        precio: parseInt(formData.precio, 10) || 0, 
+        categoria: finalCategory // Usamos la categoría determinada
+    };
 
     if (isEditing) {
       editarProducto(productData);
@@ -118,7 +131,13 @@ function AdminProductsPage() {
                             <Col sm={9}>
                                 <Form.Select 
                                     name="categoria" value={formData.categoria} 
-                                    onChange={handleChange} required
+                                    onChange={(e) => {
+                                        handleChange(e);
+                                        // Si se selecciona otra cosa que no sea 'Nueva Categoría', limpiamos el campo de nueva categoría
+                                        if (e.target.value !== 'Nueva Categoria') {
+                                            setNewCategoryName('');
+                                        }
+                                    }} required
                                 >
                                     <option value="">Selecciona...</option>
                                     {getCategories().map(cat => (
@@ -130,7 +149,8 @@ function AdminProductsPage() {
                                      <Form.Control 
                                         type="text" placeholder="Nombre nueva categoría" 
                                         className="mt-2"
-                                        onChange={(e) => setFormData(prev => ({...prev, categoria: e.target.value}))} 
+                                        value={newCategoryName} // <--- USA EL NUEVO ESTADO DE VALOR
+                                        onChange={(e) => setNewCategoryName(e.target.value)} // <--- USA EL NUEVO SETTER
                                     />
                                 )}
                             </Col>
