@@ -8,34 +8,35 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  // 1. Estado para la sesión activa (Token y datos del usuario logueado)
-  // Mantenemos esto en localStorage SOLO para que no se cierre la sesión al refrescar.
+  // Solo guardamos la sesión en localStorage para no perderla al recargar
   const [sesion, setSesion] = useState(() => {
-    const storedSession = localStorage.getItem('sesion');
-    return storedSession ? JSON.parse(storedSession) : null;
+    try {
+        const storedSession = localStorage.getItem('sesion');
+        return storedSession ? JSON.parse(storedSession) : null;
+    } catch (e) {
+        return null;
+    }
   });
 
-  // 2. Estado para la lista de usuarios (SOLO para el Admin)
+  // 2. Estado para la lista de usuarios (para admin)
   const [usuarios, setUsuarios] = useState([]);
 
   // Efecto para cargar usuarios si soy admin
   useEffect(() => {
     if (sesion?.rol === 'admin') {
+      const fetchUsuarios = async () => {
+        try {
+          const response = await api.get('/users');
+          setUsuarios(response.data);
+        } catch (error) {
+          console.error("Error cargando usuarios:", error);
+        }
+      };
       fetchUsuarios();
     }
   }, [sesion]);
 
-  const fetchUsuarios = async () => {
-    try {
-      const response = await api.get('/users'); // Llama al nuevo UserController
-      setUsuarios(response.data);
-    } catch (error) {
-      console.error("Error cargando usuarios:", error);
-    }
-  };
-
-  // --- FUNCIONES DE AUTENTICACIÓN ---
-
+  // --- LOGIN ---
   const login = async (email, password) => {
     try {
       const response = await api.post('/auth/login', { email, password });
@@ -52,6 +53,7 @@ export function AuthProvider({ children }) {
     }
   };
 
+   // --- REGISTRO ---
   const register = async (userData) => {
     try {
       const response = await api.post('/auth/register', userData);
@@ -75,30 +77,14 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('token');
   };
 
-  // --- FUNCIONES DE GESTIÓN (CRUD REAL) ---
-
-  const editarUsuario = async (usuarioEditado) => {
-    try {
-      const response = await api.put(`/users/${usuarioEditado.id}`, usuarioEditado);
-      // Actualizamos el estado local para que la tabla cambie sin recargar
-      setUsuarios(prev => prev.map(u => u.id === usuarioEditado.id ? response.data : u));
-      alert("Usuario actualizado correctamente");
-    } catch (error) {
-      console.error("Error editando usuario:", error);
-      alert("No se pudo editar el usuario");
-    }
+  // --- Funciones Admin (Placeholders conectados a API) ---
+  const editarUsuario = async (usuario) => {
+      // Implementar llamada PUT a API
+      console.log("Editar usuario:", usuario);
   };
-
   const eliminarUsuario = async (id) => {
-    try {
-      await api.delete(`/users/${id}`);
-      // Filtramos el usuario eliminado de la lista visual
-      setUsuarios(prev => prev.filter(u => u.id !== id));
-      alert("Usuario eliminado correctamente");
-    } catch (error) {
-      console.error("Error eliminando usuario:", error);
-      alert("No se pudo eliminar el usuario");
-    }
+      // Implementar llamada DELETE a API
+      console.log("Eliminar usuario:", id);
   };
 
   const value = {

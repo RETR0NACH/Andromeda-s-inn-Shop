@@ -1,5 +1,3 @@
-// RUTA: src/pages/RegisterPage.jsx
-
 import React, { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate, Link, Navigate } from 'react-router-dom';
@@ -11,32 +9,41 @@ function RegisterPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false); 
+
     const { register, isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
-    // Si el usuario ya está logueado, no debería poder registrarse
     if (isAuthenticated) {
         return <Navigate to="/" />;
     }
 
-    const handleSubmit =  async(e) => {
+    const handleSubmit = async (e) => { 
         e.preventDefault();
         setError('');
+        setLoading(true);
+
         if (password !== confirmPassword) {
             setError('Las contraseñas no coinciden.');
+            setLoading(false);
             return;
         }
         if (password.length < 6) {
             setError('La contraseña debe tener al menos 6 caracteres.');
+            setLoading(false);
             return;
         }
-        const result = await register({ nombre, apellido, email, password }); // Llamada asíncrona al registro real
 
+        // Llamada al backend
+        const result = await register({ nombre, apellido, email, password });
+        
         if (result.success) {
             navigate('/'); 
         } else {
-            setError('El correo electrónico ya está en uso.');
+            // Mostramos el error que viene del backend (ej: "El email ya existe")
+            setError(result.message); 
         }
+        setLoading(false);
     };
 
     return (
