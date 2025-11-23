@@ -40,16 +40,13 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       const response = await api.post('/auth/login', { email, password });
-      const userData = response.data;
-
-      localStorage.setItem('token', userData.token);
-      localStorage.setItem('sesion', JSON.stringify(userData));
-      setSesion(userData);
-
+      // ... lógica de éxito ...
       return { success: true, user: userData };
     } catch (error) {
       console.error("Error en login:", error);
-      return { success: false, message: "Credenciales inválidas" };
+      // CAMBIO: Intenta leer el mensaje del backend si existe
+      const serverMessage = error.response?.data || error.message;
+      return { success: false, message: serverMessage || "Error al iniciar sesión" };
     }
   };
 
