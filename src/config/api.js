@@ -10,9 +10,10 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
+    // Recuperamos las credenciales guardadas (formato: "Basic base64string")
+    const authHeader = localStorage.getItem('authHeader');
+    if (authHeader) {
+        config.headers.Authorization = authHeader;
     }
     return config;
 });

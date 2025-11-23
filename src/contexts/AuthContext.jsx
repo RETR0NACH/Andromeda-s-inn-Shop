@@ -39,31 +39,53 @@ export function AuthProvider({ children }) {
   // --- LOGIN ---
   const login = async (email, password) => {
     try {
+      // 1. Creamos la cabecera Basic Auth manualmente
+      // btoa() convierte un string a Base64 en el navegador
+      const credentials = btoa(`${email}:${password}`);
+      const basicAuthHeader = `Basic ${credentials}`;
+
+      // 2. Guardamos esto TEMPORALMENTE para hacer la petición de login
+      // Si falla, lo borraremos.
+      localStorage.setItem('authHeader', basicAuthHeader);
+
+      // 3. Llamamos al backend para verificar que los datos son correctos
       const response = await api.post('/auth/login', { email, password });
-      // ... lógica de éxito ...
+      const userData = response.data;
+
+      // 4. Si llegamos aquí, la contraseña es correcta. Guardamos sesión.
+      localStorage.setItem('sesion', JSON.stringify(userData));
+      setSesion(userData);
+
       return { success: true, user: userData };
     } catch (error) {
       console.error("Error en login:", error);
-      // CAMBIO: Intenta leer el mensaje del backend si existe
+      localStorage.removeItem('authHeader'); // Borrar credenciales si falló
       const serverMessage = error.response?.data || error.message;
-      return { success: false, message: serverMessage || "Error al iniciar sesión" };
+      return { success: false, message: serverMessage || "Credenciales incorrectas" };
     }
   };
 
-   // --- REGISTRO ---
+  // --- REGISTRO ---
   const register = async (userData) => {
     try {
-      const response = await api.post('/auth/register', userData);
-      const newUserData = response.data;
+        // En registro no hay auth header previo
+        const response = await api.post('/auth/register', userData);
+        
+        // Auto-login después del registro
+        const { email, password } = userData;
+        const credentials = btoa(`${email}:${password}`);
+        const basicAuthHeader = `Basic ${credentials}`;
+        
+        localStorage.setItem('authHeader', basicAuthHeader);
+        
+        const newUserData = response.data;
+        localStorage.setItem('sesion', JSON.stringify(newUserData));
+        setSesion(newUserData);
 
-      localStorage.setItem('token', newUserData.token);
-      localStorage.setItem('sesion', JSON.stringify(newUserData));
-      setSesion(newUserData);
-
-      return { success: true };
+        return { success: true };
     } catch (error) {
-      console.error("Error en registro:", error);
-      return { success: false, message: error.response?.data || "Error al registrar" };
+        console.error("Error en registro:", error);
+        return { success: false, message: error.response?.data || "Error al registrar" };
     }
   };
 
@@ -71,7 +93,7 @@ export function AuthProvider({ children }) {
     setSesion(null);
     setUsuarios([]); 
     localStorage.removeItem('sesion');
-    localStorage.removeItem('token');
+    localStorage.removeItem('authHeader'); // Limpiamos la cabecera
   };
 
   const editarUsuario = async (usuario) => {
