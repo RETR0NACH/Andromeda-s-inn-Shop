@@ -39,44 +39,40 @@ export function AuthProvider({ children }) {
   // --- LOGIN ---
   const login = async (email, password) => {
     try {
-      // 1. Creamos la cabecera Basic Auth manualmente
-      // btoa() convierte un string a Base64 en el navegador
+      // 1. Generar la credencial Basic Auth
       const credentials = btoa(`${email}:${password}`);
-      const basicAuthHeader = `Basic ${credentials}`;
+      const basicAuth = `Basic ${credentials}`;
 
-      // 2. Guardamos esto TEMPORALMENTE para hacer la petición de login
-      // Si falla, lo borraremos.
-      localStorage.setItem('authHeader', basicAuthHeader);
+      // 2. Guardarla temporalmente para probar el login
+      localStorage.setItem('authHeader', basicAuth);
 
-      // 3. Llamamos al backend para verificar que los datos son correctos
+      // 3. Probar conexión con el backend
       const response = await api.post('/auth/login', { email, password });
       const userData = response.data;
 
-      // 4. Si llegamos aquí, la contraseña es correcta. Guardamos sesión.
+      // 4. Si funciona, guardar la sesión
       localStorage.setItem('sesion', JSON.stringify(userData));
       setSesion(userData);
 
       return { success: true, user: userData };
     } catch (error) {
       console.error("Error en login:", error);
-      localStorage.removeItem('authHeader'); // Borrar credenciales si falló
-      const serverMessage = error.response?.data || error.message;
-      return { success: false, message: serverMessage || "Credenciales incorrectas" };
+      localStorage.removeItem('authHeader'); // Borrar si falló
+      return { success: false, message: "Credenciales inválidas" };
     }
   };
 
   // --- REGISTRO ---
   const register = async (userData) => {
     try {
-        // En registro no hay auth header previo
+        // El registro es público, no necesita auth header
         const response = await api.post('/auth/register', userData);
         
-        // Auto-login después del registro
-        const { email, password } = userData;
-        const credentials = btoa(`${email}:${password}`);
-        const basicAuthHeader = `Basic ${credentials}`;
+        // Auto-login: Crear header con los datos recién registrados
+        const credentials = btoa(`${userData.email}:${userData.password}`);
+        const basicAuth = `Basic ${credentials}`;
         
-        localStorage.setItem('authHeader', basicAuthHeader);
+        localStorage.setItem('authHeader', basicAuth);
         
         const newUserData = response.data;
         localStorage.setItem('sesion', JSON.stringify(newUserData));
@@ -93,7 +89,7 @@ export function AuthProvider({ children }) {
     setSesion(null);
     setUsuarios([]); 
     localStorage.removeItem('sesion');
-    localStorage.removeItem('authHeader'); // Limpiamos la cabecera
+    localStorage.removeItem('authHeader'); // Importante borrar esto
   };
 
   const editarUsuario = async (usuario) => {
