@@ -9,28 +9,27 @@ function LoginPage() {
     const { login, isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
+    if (isAuthenticated) {
+        return <Navigate to="/" />;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
     
-        const usuarioLogueado = await login(email, password);
+        const result = await login(email, password);
 
         if (result.success) {
-            // Si el login fue exitoso, comprobamos el rol del usuario
             if (result.user.rol === 'admin') {
                 navigate('/admin'); 
             } else {
                 navigate('/'); 
             }
         } else {
-            setError('Correo o contraseña incorrectos.');
+            setError(result.message);
         }
        
     };
-    
-    if (isAuthenticated) {
-        return <Navigate to="/" />;
-    }
 
     return (
         <div className="centered-content">
