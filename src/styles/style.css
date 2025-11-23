@@ -100,11 +100,17 @@ a {
 .page-content {
     /* En móvil, el margen es 0 */
     margin-left: 0;
-    /* ¡CORRECCIÓN! Se elimina 'width: 100%' */
     /* Añadimos transición para el movimiento */
     transition: margin-left 0.3s ease;
+    
+    /* --- AÑADIR ESTILOS DE FONDO A TODO EL CONTENIDO --- */
+    background-image: url('/images/fondos/fondo-morado-space.jpg'); /* Usa la imagen de la galaxia para un tema cósmico */
+    background-attachment: scroll; /* Scroll en móvil para rendimiento */
+    background-position: center;
+    background-repeat: repeat; /* O cover, si prefieres que no se repita y solo cubra */
+    background-size: cover;
+    min-height: 100vh; /* Asegura que cubra al menos toda la altura de la pantalla */
 }
-
 /* Overlay para la sidebar en móvil */
 .sidebar-overlay {
     position: fixed;
@@ -306,23 +312,25 @@ a {
 }
 .product-grid {
     display: grid;
-    /* Esto ya es responsive, ¡lo dejamos! */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem; /* Un poco menos de espacio */
+    /* CAMBIO: Mantiene el ancho de 280px pero usa max-content en lugar de 1fr. 
+       Esto evita que las tarjetas se estiren para rellenar el espacio si hay pocas. */
+    grid-template-columns: repeat(auto-fit, minmax(280px, max-content)); 
+    gap: 1.5rem; 
+    justify-content: center; /* AÑADIDO: Centra las tarjetas cuando no ocupan todo el ancho */
 }
 .product-card {
     background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 4px 15px #34495e;
+    box-shadow: 0 10px 15px #0e0418;
     overflow: hidden;
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
+    max-width: 350px; 
 }
 /* Desactivamos el hover 'translateY' en móvil, puede ser molesto */
 .product-card:hover {
     transform: translateY(0);
-    box-shadow: 0 8px 25px #ff00ea;
 }
 .product-card .product-link {
     text-decoration: none;
@@ -332,8 +340,8 @@ a {
 .product-card img {
     width: 100%;
     height: 220px;
-    object-fit: cover;
-    display: block; 
+    object-fit: contain; /* CAMBIO: Asegura que la imagen completa sea visible, escalándola si es necesario, sin recortar. */
+    display: block;
 }
 .product-details {
     background-color: #252638;
@@ -359,7 +367,6 @@ a {
     margin-bottom: 0px;
 }
 .product-actions{
-    padding: 1rem;
     background-color: #473258;
 }
 .product-actions .cta-button{
@@ -375,16 +382,17 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem 1rem; /* Menos padding */
+    padding: 2rem 1rem;
     min-height: 100vh;
+    background-color: transparent; /* AÑADIDO: Para que se vea el fondo del .page-content */
 }
 .login-container {
     width: 100%;
     max-width: 450px;
-    padding: 2rem; /* Menos padding */
-    background-color: #ffffff;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.9); /* CAMBIO: Añadido transparencia para un efecto "flotante" */
     border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* CAMBIO: Sombra más oscura */
 }
 .login-container h2 {
     text-align: center;
@@ -422,7 +430,7 @@ a {
     width: 100%;
     padding: 15px;
     border: none;
-    background-color: var(--color-acento);
+    background-color: #2b0441;
     color: white;
     font-size: 1.3rem;
     font-family: var(--fuente-titulos);
@@ -431,7 +439,8 @@ a {
     transition: background-color 0.3s;
 }
 .cta-button:hover {
-    background-color: var(--color-acento-hover);
+    box-shadow: rgb(212, 15, 204) 0px 0px 20px;
+    transition: 0.2s;
 }
 .form-switch {
     text-align: center;
@@ -567,19 +576,18 @@ a {
 .contact-page-wrapper {
     /* Ajustamos el min-height para que cubra toda el área visible */
     min-height: 100vh; 
-    background-color: #686767; /* Fondo gris claro para el área exterior */
-    padding: 2rem 1rem; /* Añadimos padding para que el contenedor no se pegue a los bordes */
+    background-color: transparent; /* CAMBIO: Hacemos el wrapper transparente */
+    padding: 2rem 1rem; 
 }
 
 .contact-page-container {
     max-width: 1000px;
-    margin: 0 auto; /* Centrado dentro del wrapper y sin margen vertical */
+    margin: 0 auto;
     padding: 1.5rem;
-    background-color: #ffffff; /* Revertimos el interior a blanco para contraste */
+    background-color: rgba(255, 255, 255, 0.9); /* CAMBIO: Fondo semitransparente para legibilidad */
     border-radius: 8px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5); /* CAMBIO: Sombra más oscura */
 }
-
 .contact-page-container h2 { /* Asumiendo que es h2, no h1 */
     text-align: center;
     font-size: 2rem; /* Fuente más pequeña */
@@ -631,7 +639,7 @@ a {
     flex-direction: column; /* Apilado en móvil */
     gap: 1.5rem; 
     padding: 1rem; /* Menos padding */
-    background-color: #ffffff;
+    background-color: #0f0020;
     border-radius: 8px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     margin: 1rem; 
@@ -652,20 +660,20 @@ a {
     text-align: center; /* Centrado en móvil */
 }
 .product-details-text h2 {
-    font-size: 2rem; /* Fuente más pequeña */
-    color: var(--color-texto-oscuro);
+    font-size: 3rem; /* Fuente más pequeña */
+    color: rgb(255, 255, 255);
     margin-bottom: 1rem;
 }
 .product-description {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.1rem; /* Fuente más pequeña */
+    font-size: 1.3rem; /* Fuente más pequeña */
     line-height: 1.6;
-    color: #555;
+    color: #ffffff;
     flex-grow: 1; 
 }
 .product-price-large {
     font-size: 3rem; /* Fuente más pequeña */
-    color: var(--color-acento);
+    color: rgb(255, 0, 255);
     margin: 1.5rem 0;
 }
 
@@ -697,7 +705,7 @@ a {
 
 .catalog-page {
     /* --- INICIO DE LA MODIFICACIÓN --- */
-    background-image: url('/images/fondo_estrellas.png'); /* Ruta a tu imagen */
+    background-image: url('public/images/fondos/fondo-morado-space.jpg'); /* Ruta a tu imagen */
     background-attachment: fixed;           /* Efecto Parallax */
     background-position: center;            /* Centra la imagen */
     background-repeat: no-repeat;           /* Evita que se repita */
@@ -712,11 +720,10 @@ a {
 .catalog-page h2.catalog-title {
     text-align: center;
     font-size: 2.2rem; /* Fuente más pequeña */
-    margin-bottom: 2rem;
     color: var(--color-texto-claro); /* Cambiado a texto claro para contraste */
     background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para el título */
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: 60px;
     display: inline-block; /* Ajusta el fondo al tamaño del texto */
 }
 
@@ -1162,9 +1169,7 @@ a {
     #product-section h3 {
         font-size: 2.5rem;
     }
-    .product-grid {
-        gap: 2rem;
-    }
+
     /* Reactiva el hover en escritorio */
     .product-card:hover {
         transform: translateY(-10px);
@@ -1191,15 +1196,8 @@ a {
     .product-details-text {
         text-align: left; /* Alineado a la izquierda */
     }
-    .product-details-text h2 {
-        font-size: 2.8rem;
-    }
-    .product-description {
-        font-size: 1.2rem;
-    }
-    .product-price-large {
-        font-size: 4rem;
-    }
+    
+ 
 
     /* --- PÁGINA DE CONTACTO --- */
     .contact-page-container {
