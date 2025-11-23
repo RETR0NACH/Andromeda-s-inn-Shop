@@ -41,7 +41,7 @@ function RegisterPage() {
             navigate('/'); 
         } else {
             // Mostramos el error que viene del backend (ej: "El email ya existe")
-            setError(result.message); 
+            setError(result.message || "Error al registrar"); 
         }
         setLoading(false);
     };
