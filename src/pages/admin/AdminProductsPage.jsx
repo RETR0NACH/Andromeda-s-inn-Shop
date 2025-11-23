@@ -226,7 +226,11 @@ function AdminProductsPage() {
                       <td>{producto.id}</td>
                       <td>
                         <Image 
-                          src={producto.img.startsWith('/') ? producto.img : `/${producto.img}`} 
+                          src={
+                            producto.img && producto.img.startsWith('/') 
+                              ? producto.img 
+                              : `/${producto.img || 'placeholder.png'}`
+                          } 
                           alt={producto.nombre} 
                           className="admin-product-img" 
                           onError={(e) => { e.target.onerror = null; e.target.src="/images/placeholder.png"}} 
