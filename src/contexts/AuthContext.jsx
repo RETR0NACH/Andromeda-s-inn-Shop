@@ -77,15 +77,30 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('token');
   };
 
-  // --- Funciones Admin (Placeholders conectados a API) ---
   const editarUsuario = async (usuario) => {
-      // Implementar llamada PUT a API
-      console.log("Editar usuario:", usuario);
-  };
-  const eliminarUsuario = async (id) => {
-      // Implementar llamada DELETE a API
-      console.log("Eliminar usuario:", id);
-  };
+    try {
+        // Asume que tu backend tiene PUT /users/{id}
+        await api.put(`/users/${usuario.id}`, usuario);
+        
+        // Actualizamos la lista local para ver el cambio inmediatamente
+        setUsuarios(prev => prev.map(u => u.id === usuario.id ? { ...u, ...usuario } : u));
+        alert("Usuario actualizado correctamente");
+    } catch (error) {
+        console.error("Error editando usuario:", error);
+        alert("Error al editar usuario");
+    }
+};
+
+const eliminarUsuario = async (id) => {
+    try {
+        await api.delete(`/users/${id}`);
+        setUsuarios(prev => prev.filter(u => u.id !== id));
+        alert("Usuario eliminado");
+    } catch (error) {
+        console.error("Error eliminando usuario:", error);
+        alert("Error al eliminar usuario");
+    }
+};
 
   const value = {
     usuarios, // Ahora viene de la BD
