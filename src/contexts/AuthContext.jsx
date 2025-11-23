@@ -1,5 +1,5 @@
-import React, { createContext, useContext } from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import api from '../config/api'; 
 
 const AuthContext = createContext();
 
@@ -8,104 +8,81 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [usuarios, setUsuarios] = useLocalStorage('usuarios', []);
-  const [sesion, setSesion] = useLocalStorage('sesion', null);
+  // Inicializamos el estado leyendo del localStorage por si recarga la página
+  const [sesion, setSesion] = useState(() => {
+    const storedSession = localStorage.getItem('sesion');
+    return storedSession ? JSON.parse(storedSession) : null;
+  });
 
-  const login = (email, password) => {
-    const adminCredentials = {
-      id: 0, 
-      nombre: 'Andromeda',
-      apellido: 'Admin',
-      email: 'andromeda@growshop.cl',
-      password: 'admin123',
-      rol: 'admin'
-    };
+  // Función de Login Real
+  const login = async (email, password) => {
+    try {
+      const response = await api.post('/auth/login', { email, password });
+      
+      // El backend nos devuelve: { token, id, email, rol, ... }
+      const userData = response.data;
 
-    const allUsersWithAdmin = [...usuarios];
-    if (!allUsersWithAdmin.some(u => u.email === adminCredentials.email)) {
-      allUsersWithAdmin.push(adminCredentials);
+      // 1. Guardamos el Token para las futuras peticiones (api.js lo usa)
+      localStorage.setItem('token', userData.token);
+      
+      // 2. Guardamos la sesión del usuario
+      localStorage.setItem('sesion', JSON.stringify(userData));
+      setSesion(userData);
+
+      return { success: true, user: userData };
+    } catch (error) {
+      console.error("Error en login:", error);
+      return { success: false, message: "Credenciales incorrectas o error de servidor" };
     }
-    
-    // Buscamos al usuario en la lista que incluye al admin
-    const usuario = allUsersWithAdmin.find(u => u.email === email && u.password === password);
-
-    if (usuario) {
-      setSesion(usuario);
-      return usuario; // Devolvemos el objeto del usuario para saber su rol
-    }
-    return null; // Devolvemos null si las credenciales son incorrectas
   };
 
-  const register = (userData) => {
-    if (userData.email === 'andromeda@growshop.cl') {
-        return false;
+  // Función de Registro Real
+  const register = async (userData) => {
+    try {
+      // Enviamos nombre, apellido, email, password al backend
+      const response = await api.post('/auth/register', userData);
+      const newUserData = response.data;
+
+      // Autologin tras registro exitoso
+      localStorage.setItem('token', newUserData.token);
+      localStorage.setItem('sesion', JSON.stringify(newUserData));
+      setSesion(newUserData);
+
+      return { success: true };
+    } catch (error) {
+      console.error("Error en registro:", error);
+      // Si el backend devuelve un mensaje de error (ej: email repetido), lo capturamos
+      return { success: false, message: error.response?.data || "Error al registrarse" };
     }
-    const existe = usuarios.some(u => u.email === userData.email);
-    if (existe) {
-      return false;
-    }
-    const nuevoUsuario = { ...userData, id: Date.now(), rol: 'cliente' };
-    setUsuarios(prev => [...prev, nuevoUsuario]);
-    setSesion(nuevoUsuario);
-    return true;
   };
 
   const logout = () => {
     setSesion(null);
+    localStorage.removeItem('sesion');
+    localStorage.removeItem('token');
   };
 
-const editarUsuario = (usuarioActualizado) => {
-
-    console.log('Contexto AuthContext: Se llamó a editarUsuario con:', usuarioActualizado);
-
-    if (usuarioActualizado.id === 0) {
-        console.warn("No se puede editar el usuario administrador.");
-        return;
-    }
-    setUsuarios(prevUsuarios => 
-      prevUsuarios.map(u => 
-        u.id === usuarioActualizado.id 
-        ? { ...u, // Mantenemos ID, password y rol originales
-            nombre: usuarioActualizado.nombre, 
-            apellido: usuarioActualizado.apellido, 
-            email: usuarioActualizado.email 
-          } 
-        : u
-      )
-    );
-    // Si el usuario editado es el que está en sesión, actualizamos la sesión también
-    if (sesion && sesion.id === usuarioActualizado.id) {
-        setSesion(prev => ({ ...prev, ...usuarioActualizado }));
-    }
+  // Funciones de admin (Simplificadas para este contexto)
+  const editarUsuario = async (usuario) => {
+      // Lógica futura para conectar con backend si es necesario
+      console.log("Editar usuario no implementado en backend aún", usuario);
   };
-  
-    const eliminarUsuario = (id) => {
-    // No permitir eliminar al admin (id 0)
-    if (id === 0) {
-        console.warn("No se puede eliminar el usuario administrador.");
-        return;
-    }
-    // No permitir eliminar al usuario actualmente en sesión
-    if (sesion && sesion.id === id) {
-        alert("No puedes eliminar tu propia cuenta mientras estás en sesión.");
-        return;
-    }
-    setUsuarios(prevUsuarios => prevUsuarios.filter(u => u.id !== id));
+  const eliminarUsuario = async (id) => {
+      // Lógica futura
+      console.log("Eliminar usuario no implementado en backend aún", id);
   };
-
 
   const value = {
-    usuarios,
+    usuarios: [], // Ya no usamos lista local de usuarios
     sesion,
     isAuthenticated: !!sesion,
-    isAdmin: sesion?.rol === 'admin',
+    isAdmin: sesion?.rol === 'admin', // Asegúrate que tu backend devuelve 'admin' en minúsculas o ajusta aquí
     login,
     register,
     logout,
-    editarUsuario, 
-    eliminarUsuario, 
+    editarUsuario,
+    eliminarUsuario
   };
-
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

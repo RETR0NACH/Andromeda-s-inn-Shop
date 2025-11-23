@@ -19,7 +19,7 @@ function RegisterPage() {
         return <Navigate to="/" />;
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit =  async(e) => {
         e.preventDefault();
         setError('');
         if (password !== confirmPassword) {
@@ -30,9 +30,10 @@ function RegisterPage() {
             setError('La contraseña debe tener al menos 6 caracteres.');
             return;
         }
-        const success = register({ nombre, apellido, email, password });
-        if (success) {
-            navigate('/'); // Redirige al inicio después de un registro exitoso
+        const result = await register({ nombre, apellido, email, password }); // Llamada asíncrona al registro real
+
+        if (result.success) {
+            navigate('/'); 
         } else {
             setError('El correo electrónico ya está en uso.');
         }

@@ -9,18 +9,18 @@ function LoginPage() {
     const { login, isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
     
-        const usuarioLogueado = login(email, password);
+        const usuarioLogueado = await login(email, password);
 
-        if (usuarioLogueado) {
+        if (result.success) {
             // Si el login fue exitoso, comprobamos el rol del usuario
-            if (usuarioLogueado.rol === 'admin') {
-                navigate('/admin'); // Si es admin, va al panel de administración
+            if (result.user.rol === 'admin') {
+                navigate('/admin'); 
             } else {
-                navigate('/'); // Si es cliente, va a la página principal
+                navigate('/'); 
             }
         } else {
             setError('Correo o contraseña incorrectos.');
