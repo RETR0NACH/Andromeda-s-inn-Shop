@@ -39,28 +39,24 @@ export function AuthProvider({ children }) {
   // --- LOGIN ---
   const login = async (email, password) => {
     try {
-      // 1. Generar la credencial Basic Auth
-      const credentials = btoa(`${email}:${password}`);
-      const basicAuth = `Basic ${credentials}`;
+        // 1. Limpieza preventiva
+        localStorage.removeItem('authHeader');
 
-      // 2. Guardarla temporalmente para probar el login
-      localStorage.setItem('authHeader', basicAuth);
+        // 2. Petición al backend
+        console.log("Intentando loguear..."); 
+        const response = await api.post('/auth/login', { email, password });
+        
+        // ... lógica de éxito ...
+        return { success: true, user: response.data };
 
-      // 3. Probar conexión con el backend
-      const response = await api.post('/auth/login', { email, password });
-      const userData = response.data;
-
-      // 4. Si funciona, guardar la sesión
-      localStorage.setItem('sesion', JSON.stringify(userData));
-      setSesion(userData);
-
-      return { success: true, user: userData };
     } catch (error) {
-      console.error("Error en login:", error);
-      localStorage.removeItem('authHeader'); // Borrar si falló
-      return { success: false, message: "Credenciales inválidas" };
+        console.error("Error en login:", error); 
+        return { 
+            success: false, 
+            message: error.response?.data?.message || "Error de conexión con el servidor" 
+        };
     }
-  };
+};
 
   // --- REGISTRO ---
   const register = async (userData) => {
