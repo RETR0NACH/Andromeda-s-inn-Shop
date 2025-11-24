@@ -39,24 +39,45 @@ export function AuthProvider({ children }) {
   // --- LOGIN ---
   const login = async (email, password) => {
     try {
-        // 1. Limpieza preventiva
+        console.log("Iniciando login para:", email);
+        
+        // Limpiamos cualquier auth previa para evitar conflictos
         localStorage.removeItem('authHeader');
 
-        // 2. Petición al backend
-        console.log("Intentando loguear..."); 
+        // Hacemos la petición POST sin cabeceras de autorización (es pública)
         const response = await api.post('/auth/login', { email, password });
         
-        // ... lógica de éxito ...
-        return { success: true, user: response.data };
+        console.log("Respuesta del servidor:", response.status);
+
+        if (response.status === 200) {
+            const userData = response.data;
+            
+            // Guardamos la credencial para futuras peticiones
+            const credentials = btoa(`${email}:${password}`);
+            localStorage.setItem('authHeader', `Basic ${credentials}`);
+            
+            localStorage.setItem('sesion', JSON.stringify(userData));
+            setSesion(userData);
+            return { success: true, user: userData };
+        }
 
     } catch (error) {
-        console.error("Error en login:", error); 
-        return { 
-            success: false, 
-            message: error.response?.data?.message || "Error de conexión con el servidor" 
-        };
+        console.error("Error completo:", error);
+        
+        // Manejo de errores específico
+        if (error.response) {
+            // El servidor respondió con un código de error (ej: 401, 403, 404)
+            if (error.response.status === 401) return { success: false, message: "Contraseña incorrecta" };
+            if (error.response.status === 403) return { success: false, message: "Acceso denegado (403)" };
+            if (error.response.status === 404) return { success: false, message: "Usuario no encontrado" };
+        } else if (error.request) {
+            // La petición se hizo pero no hubo respuesta (servidor caído)
+            return { success: false, message: "El servidor no responde" };
+        }
+        
+        return { success: false, message: "Error desconocido al iniciar sesión" };
     }
-};
+  };
 
   // --- REGISTRO ---
   const register = async (userData) => {
