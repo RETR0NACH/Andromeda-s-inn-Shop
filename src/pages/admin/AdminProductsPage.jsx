@@ -226,18 +226,20 @@ function AdminProductsPage() {
                       <td>{producto.id}</td>
                       <td>
                         <Image 
-                          src={
-                            producto.img && producto.img.startsWith('/') 
-                              ? producto.img 
-                              : `/${producto.img || 'placeholder.png'}`
-                          } 
-                          alt={producto.nombre} 
-                          className="admin-product-img" 
-                          onError={(e) => { e.target.onerror = null; e.target.src="/images/placeholder.png"}} 
-                        />
+                        src={producto.img} // Intenta cargar la ruta tal cual viene de la BD
+                        alt={producto.nombre} 
+                        className="admin-product-img" 
+                        onError={(e) => { 
+                            // 1. Detenemos el bucle eliminando el manejador de error
+                            e.target.onerror = null; 
+                            // 2. Ponemos una imagen de respaldo que SÍ exista o una de internet temporalmente
+                            // Si tienes la imagen '/images/placeholder.png' úsala, si no, usa esta URL segura:
+                            e.target.src = "https://placehold.co/100x100?text=Sin+Imagen"; 
+                        }} 
+                      />
                       </td>
                       <td>{producto.nombre}</td>
-                      <td>${producto.precio.toLocaleString('es-CL')}</td>
+                      <td>{producto.precio.toLocaleString('es-CL')}</td>
                       <td>
                           <Button variant="outline-primary" size="sm" className="me-2" onClick={() => handleShowEditForm(producto)}>
                             <i className="bi bi-pencil-square"></i> Editar

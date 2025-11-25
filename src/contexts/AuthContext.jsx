@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
 
   // Efecto para cargar usuarios si soy admin
   useEffect(() => {
-    if (sesion?.rol === 'admin') {
+    if (sesion?.rol === 'ADMIN' || sesion?.rol === 'admin') {
       const fetchUsuarios = async () => {
         try {
           const response = await api.get('/users');
@@ -51,10 +51,10 @@ export function AuthProvider({ children }) {
 
         if (response.status === 200) {
             const userData = response.data;
-            
-            // Guardamos la credencial para futuras peticiones
-            const credentials = btoa(`${email}:${password}`);
-            localStorage.setItem('authHeader', `Basic ${credentials}`);
+            // Guardar el token en el localStorage para futuros requests
+            if (userData.token) {
+              localStorage.setItem('token', userData.token);
+            }
             
             localStorage.setItem('sesion', JSON.stringify(userData));
             setSesion(userData);
@@ -85,13 +85,12 @@ export function AuthProvider({ children }) {
         // El registro es público, no necesita auth header
         const response = await api.post('/auth/register', userData);
         
-        // Auto-login: Crear header con los datos recién registrados
-        const credentials = btoa(`${userData.email}:${userData.password}`);
-        const basicAuth = `Basic ${credentials}`;
-        
-        localStorage.setItem('authHeader', basicAuth);
-        
         const newUserData = response.data;
+        
+        if (newUserData.token) {
+            localStorage.setItem('token', newUserData.token);
+        }
+        
         localStorage.setItem('sesion', JSON.stringify(newUserData));
         setSesion(newUserData);
 

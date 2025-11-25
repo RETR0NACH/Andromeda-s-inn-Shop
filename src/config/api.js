@@ -1,21 +1,37 @@
 import axios from 'axios';
 
-const apiUrl = 'https://backen-end.onrender.com/api/v1'; 
+const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
 
 const api = axios.create({
-  baseURL: apiUrl,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+    baseURL: BASE_URL,
+    headers: { 'Content-Type': 'application/json' },
 });
 
-api.interceptors.request.use((config) => {
-    // Recuperamos las credenciales guardadas (formato: "Basic base64string")
-    const authHeader = localStorage.getItem('authHeader');
-    if (authHeader) {
-        config.headers.Authorization = authHeader;
+// Interceptor: agrega automáticamente el token
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('token'); 
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
-});
+  },
+  (error) => Promise.reject(error)
+);
+
+// Interceptor de respuestas
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('sesion');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default api;

@@ -4,6 +4,7 @@ import { useOrders } from '../contexts/OrderContext';
 import { Link } from 'react-router-dom';
 import Toast from '../components/common/Toast';
 
+
 function CartPage() {
     const { cart, addToCart, decreaseQuantity, removeFromCart, clearCart, total } = useCart();
     const { addOrder } = useOrders();
@@ -69,7 +70,10 @@ function CartPage() {
                                         <tr key={item.id}>
                                             <td>
                                                 <div className="cart-item-info">
-                                                    <img src={item.img.startsWith('/') ? item.img : `/${item.img}`} alt={item.nombre} />
+                                                    <img 
+                                                        src={`${item?.img?.startsWith('/') ? item.img : item?.img ? '/' + item.img : '/placeholder.png'}`} 
+                                                        alt={item.nombre}
+                                                    />
                                                     <span>{item.nombre}</span>
                                                 </div>
                                             </td>

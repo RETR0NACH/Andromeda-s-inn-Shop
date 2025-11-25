@@ -20,7 +20,8 @@ function LoginPage() {
         const result = await login(email, password);
 
         if (result.success) {
-            if (result.user.rol === 'admin') {
+            const rolUsuario = result.user.rol ? result.user.rol.toUpperCase() : '';
+            if (rolUsuario === 'ADMIN') {
                 navigate('/admin'); 
             } else {
                 navigate('/'); 
@@ -28,7 +29,6 @@ function LoginPage() {
         } else {
             setError(result.message);
         }
-       
     };
 
     return (
