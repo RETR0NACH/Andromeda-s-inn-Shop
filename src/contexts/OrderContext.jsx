@@ -29,28 +29,31 @@ export function OrderProvider({ children }) {
 
   // 2. Crear Pedido (Enviar al Backend)
   const addOrder = async (cart, total) => {
-    try {
-      const orderData = {
-        total: total,
-        // Nota: Si tu backend espera detalles de productos, agrégalos aquí.
-        // Por ahora enviamos lo básico para que guarde el registro.
-      };
+  try {
+    const orderData = {
+      total: total,
+      items: cart.map(item => ({
+        productId: item.id,
+        quantity: item.cantidad,
+        unitPrice: item.precio
+      }))
+    };
 
-      // POST a la base de datos real
-      const response = await api.post('/orders', orderData);
-      
-      if (response.status === 200) {
-        alert("¡Compra realizada con éxito! (Guardada en BD)");
-        // Si es admin y está viendo la lista, la actualizamos
-        if (isAdmin) setOrders(prev => [...prev, response.data]);
-        return true;
-      }
-    } catch (error) {
-      console.error("Error al crear pedido:", error);
-      alert("Error al procesar la compra. ¿Estás logueado?");
-      return false;
+    const response = await api.post('/orders', orderData);
+
+    if (response.status === 201 || response.status === 200) {
+      alert("¡Compra realizada con éxito!");
+      if (isAdmin) setOrders(prev => [...prev, response.data]);
+      return true;
     }
-  };
+
+  } catch (error) {
+    console.error("Error al crear pedido:", error);
+    alert("Error al procesar la compra. ¿Estás logueado?");
+    return false;
+  }
+};
+
 
   const value = {
     orders,
