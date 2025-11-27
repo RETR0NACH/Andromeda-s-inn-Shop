@@ -705,7 +705,7 @@ a {
 
 .catalog-page {
     /* --- INICIO DE LA MODIFICACIÓN --- */
-    background-image: url('public/images/fondos/fondo-morado-space.jpg'); /* Ruta a tu imagen */
+    background-image: url('/images/fondos/fondo-morado-space.jpg'); /* Ruta a tu imagen */
     background-attachment: fixed;           /* Efecto Parallax */
     background-position: center;            /* Centra la imagen */
     background-repeat: no-repeat;           /* Evita que se repita */
