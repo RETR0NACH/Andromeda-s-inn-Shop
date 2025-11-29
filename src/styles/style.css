@@ -104,7 +104,7 @@ a {
     transition: margin-left 0.3s ease;
     
     /* --- AÑADIR ESTILOS DE FONDO A TODO EL CONTENIDO --- */
-    background-image: url('/images/fondos/fondo-morado-space.jpg'); /* Usa la imagen de la galaxia para un tema cósmico */
+    background-image: url('/images/fondo-morado-space.jpg'); /* Usa la imagen de la galaxia para un tema cósmico */
     background-attachment: scroll; /* Scroll en móvil para rendimiento */
     background-position: center;
     background-repeat: repeat; /* O cover, si prefieres que no se repita y solo cubra */
@@ -274,7 +274,7 @@ a {
 }
 #welcome-page {
     height: 70vh; /* Altura menor en móvil */
-    background-image: url('/images/fondos/fondo-andromeda-galaxy.png'); 
+    background-image: url('/images/fondo-andromeda-galaxy.png'); 
     /* Parallax puede ser costoso en móviles, usamos 'scroll' */
     background-attachment: scroll;
     background-position: center;
@@ -705,7 +705,7 @@ a {
 
 .catalog-page {
     /* --- INICIO DE LA MODIFICACIÓN --- */
-    background-image: url('/images/fondos/fondo-morado-space.jpg'); /* Ruta a tu imagen */
+    background-image: url('/images/fondo-morado-space.jpg'); /* Ruta a tu imagen */
     background-attachment: fixed;           /* Efecto Parallax */
     background-position: center;            /* Centra la imagen */
     background-repeat: no-repeat;           /* Evita que se repita */
