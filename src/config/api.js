@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+const BASE_URL = import.meta.env.VITE_API_URL || 'https://andromeda-backend-ahkm.onrender.com/api/v1';
 
 const api = axios.create({
     baseURL: BASE_URL,
